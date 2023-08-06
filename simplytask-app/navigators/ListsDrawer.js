@@ -1,6 +1,9 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { ListScreen } from '../screens/ListScreen'
-import { ListsDrawerContent } from './ListsDrawerContent'
+import { ListScreen } from '../screens/ListScreen';
+import { CreateNewListScreen } from '../screens/CreateNewListScreen';
+import { ListsDrawerContent } from './ListsDrawerContent';
+import { Button } from 'react-native';
+import { IconButton } from '../components/NavComponents';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,10 +20,45 @@ const Drawer = createDrawerNavigator();
 export function ListsDrawer() {
     return (
       <Drawer.Navigator
-        initialRouteName='ListScreen'
+        initialRouteName='List'
         drawerContent={(props) => <ListsDrawerContent {...props}/>}
       >
-        <Drawer.Screen name="List" component={ListScreen} initialParams={{listName: 'No List Selected'}}/>
+        <Drawer.Screen 
+          name="List" 
+          component={ListScreen} 
+          initialParams={{listName: 'No List Selected'}}
+          options={
+            ({ route, navigation }) => ({ 
+              headerTitle: route.params.listName,
+              headerRight: (props) => (
+                <IconButton
+                  title="plus"
+                  image={require('../assets/images/plus.png')}
+                  onPress={() => {
+                    navigation.navigate('CreateNewList');
+                  }}
+                ></IconButton>
+              ),
+            })
+          }
+        />
+
+        <Drawer.Screen 
+          name="CreateNewList"
+          component={CreateNewListScreen}
+          options={
+            {
+              headerTitle: 'Create new list',
+              headerRight: (props) => (
+                <Button 
+                  title='Create'
+                  onPress={() => alert('Create list button pressed')}
+                />
+              ),
+            }
+          }
+        />
+
       </Drawer.Navigator>
     );
 }

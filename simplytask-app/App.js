@@ -8,44 +8,6 @@ import { BottomTabs } from './navigators/BottomTabs';
 import { DetailsScreen } from './screens/DetailsScreen';
 
 
-// function GroceriesList( { navigation } ) {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Groceries List</Text>
-//       <Button 
-//         title="View details"
-//         onPress={() => navigation.navigate('Details')}
-//       />
-//     </View>
-//   );
-// }
-
-// function PartyList( { navigation } ) {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Party List</Text>
-//       <Button 
-//         title="View details"
-//         onPress={() => navigation.navigate('Details')}
-//       />
-//     </View>
-//   );
-// }
-
-// function AssignmentToDos( { navigation } ) {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Assignment To Dos</Text>
-//       <Button 
-//         title="View details"
-//         onPress={() => navigation.navigate('Details')}
-//       />
-//     </View>
-//   );
-// }
-
-
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
