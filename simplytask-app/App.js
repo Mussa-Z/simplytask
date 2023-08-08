@@ -2,16 +2,20 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TopNavBar } from './navigators/TopNavBar';
+import { TopNavBar } from './components/Navigation';
+import { themes, ThemeContext } from './common/theme-context';
 import { ListContext, ListDataContext } from './common/list-context';
 import { useState, useMemo } from 'react';
 import { StackNav } from './navigators/StackNav';
 
 
-const Stack = createNativeStackNavigator();
-
 export default function App() {
+
+  const [theme, setTheme] = useState(themes.light);
+  const selectedTheme = useMemo(
+    () => ({theme, setTheme}),
+    [theme]
+  );
 
   const [currentList, setCurrentList] = useState('No List Selected');
   const currentListName = useMemo(
@@ -20,7 +24,6 @@ export default function App() {
   );
 
   const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
-
   const [listData, setListData] = useState(startingData);
   const lists = useMemo(
     () => ({listData, setListData}),
@@ -28,27 +31,29 @@ export default function App() {
   );
 
   return (
+    <ThemeContext.Provider value={selectedTheme}>
 
-    <ListContext.Provider value={currentListName}>
+      <ListContext.Provider value={currentListName}>
 
-      <ListDataContext.Provider value={lists}>
+        <ListDataContext.Provider value={lists}>
 
-        <SafeAreaView style={styles.safeView}>
+          <SafeAreaView style={styles.safeView}>
 
-          <TopNavBar></TopNavBar>
+            <TopNavBar></TopNavBar>
 
-          <NavigationContainer>
+            <NavigationContainer>
 
-              <StackNav></StackNav>
+                <StackNav></StackNav>
 
-          </NavigationContainer>
+            </NavigationContainer>
 
-        </SafeAreaView>
+          </SafeAreaView>
 
-      </ListDataContext.Provider>
+        </ListDataContext.Provider>
 
-    </ListContext.Provider>
+      </ListContext.Provider>
 
+    </ThemeContext.Provider>
   );
 }
 

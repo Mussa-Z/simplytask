@@ -7,10 +7,8 @@ export function ListName(props) {
     const {currentList, setCurrentList} = useContext(ListContext);
     return(
         <TouchableOpacity
-            // style={props.isFocused ? styles.activeItem : styles.item}
             style={currentList == props.name ? styles.activeItem : styles.item}
             onPress={ () => {
-                // props.updateCurrentListCallback(props.name);
                 setCurrentList(props.name);
                 props.navigation.navigate('List', {listName: props.name});
             }}

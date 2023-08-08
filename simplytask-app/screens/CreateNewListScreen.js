@@ -1,9 +1,11 @@
 import { StyleSheet, View, TextInput } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import { ThemeContext } from '../common/theme-context';
 
 export function CreateNewListScreen( { route, navigation }) {
 
     const textInputRef = useRef();
+    const {theme, setTheme} = useContext(ThemeContext);
 
     const focusOnInput = e => {
         textInputRef.current.focus();
@@ -12,7 +14,7 @@ export function CreateNewListScreen( { route, navigation }) {
     navigation.addListener("focus", focusOnInput);
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: theme.background}]}>
         <TextInput
             ref={textInputRef} 
             placeholder='Enter list name'
@@ -23,7 +25,7 @@ export function CreateNewListScreen( { route, navigation }) {
                 });
             }}
         />
-        <View style={styles.deadZone}></View>
+        {/* <View style={styles.deadZone}></View> */}
       </View>
     );
 }
@@ -45,7 +47,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     deadZone: {
-        backgroundColor: 'lightgrey',
         width: '100%',
         height: '100%'
     }

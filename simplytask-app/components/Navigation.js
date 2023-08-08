@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 /** ICON BUTTON COMPONENT */
 export function IconButton(props) {
@@ -12,6 +12,17 @@ export function IconButton(props) {
     );
 }
 
+/** TOP NAV BAR */
+export function TopNavBar() {
+    return (
+        <View style ={styles.topBar}>
+            <Text>Avatar Placeholder</Text>
+            <Text>Lists</Text>
+            <Text>Coins Placeholder</Text>
+      </View>
+    );
+}
+
 const styles = StyleSheet.create({
     iconButton: {
         flex: 1,
@@ -22,5 +33,11 @@ const styles = StyleSheet.create({
     iconImage: {
         width: 16,
         height: 16,
-    }
+    },
+    topBar: {
+        backgroundColor: '#DDCECE', // DEBUG: 'red'
+        height: 65,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 });
