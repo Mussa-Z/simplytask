@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatsScreen } from '../screens/StatsScreen';
 import { RewardsScreen } from '../screens/RewardsScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
-import { ListsDrawer } from './ListsDrawer'
+import { ListsDrawer } from './ListsDrawer';
 
 const Tab = createBottomTabNavigator();
 

@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useState } from 'react';
 import { ListScreen } from '../screens/ListScreen';
-import { CreateNewListScreen } from '../screens/CreateNewListScreen';
 import { ListsDrawerContent } from './ListsDrawerContent';
 import { Button } from 'react-native';
 import { IconButton } from '../components/NavComponents';
@@ -17,11 +17,30 @@ const Drawer = createDrawerNavigator();
 //   );
 // }
 
-export function ListsDrawer() {
+export function ListsDrawer({route, navigation}) {
+
+    // const [listsData, setListsData] = useState(['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test']);
+    // const [currentList, setCurrentList] = useState('');
+    
+    // function addListCallback(listName) {
+    //   if(listName != '') {
+    //     const updatedListsData = [...listsData];
+    //     updatedListsData.push(listName);
+    //     setListsData(updatedListsData);
+    //   }
+    // } 
+
+    // function updateCurrentListCallback(listId) {
+    //   if (listId != '') {
+    //     setCurrentList(listId);
+    //   }
+    // }
+    // const additionalParams = {listNames: [...listsData], currentList: currentList, updateCurrentListCallback: updateCurrentListCallback}
+
     return (
       <Drawer.Navigator
         initialRouteName='List'
-        drawerContent={(props) => <ListsDrawerContent {...props}/>}
+        drawerContent={(props) => <ListsDrawerContent {...props} />}
       >
         <Drawer.Screen 
           name="List" 
@@ -42,23 +61,7 @@ export function ListsDrawer() {
             })
           }
         />
-
-        <Drawer.Screen 
-          name="CreateNewList"
-          component={CreateNewListScreen}
-          options={
-            {
-              headerTitle: 'Create new list',
-              headerRight: (props) => (
-                <Button 
-                  title='Create'
-                  onPress={() => alert('Create list button pressed')}
-                />
-              ),
-            }
-          }
-        />
-
       </Drawer.Navigator>
     );
+
 }
