@@ -60,6 +60,7 @@ export default function App() {
 const styles = StyleSheet.create({
   safeView: {
     flex: 1,
+    backgroundColor: 'red',
     width: '100%'
   },
 });

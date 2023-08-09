@@ -26,20 +26,20 @@ export function StackNav() {
                 initialParams={{listName: ''}}
                 options={
                     ({ route, navigation }) => ({ 
-                    headerTitle: 'Create new list',
-                    headerRight: (props) => (
-                        <Button 
-                            title='Create'
-                            disabled={route.params.listName == '' ? true : false}
-                            onPress={() => {
-                                if (route.params.listName != ''){
-                                    updatedListsData.push(route.params.listName);
-                                    setListData(updatedListsData);
-                                    setCurrentList(route.params.listName);
-                                    navigation.navigate('List', {listName: route.params.listName})
-                                }
+                        headerTitle: 'Create new list',
+                        headerRight: (props) => (
+                            <Button 
+                                title='Create'
+                                disabled={route.params.listName == '' ? true : false}
+                                onPress={() => {
+                                    if (route.params.listName != ''){
+                                        updatedListsData.push(route.params.listName);
+                                        setListData(updatedListsData);
+                                        setCurrentList(route.params.listName);
+                                        navigation.navigate('List', {listName: route.params.listName})
+                                    }
 
-                            }}
+                                }}
                         />
                         // <TouchableOpacity
                         //     style={currentList == props.name ? styles.activeItem : styles.item}
@@ -52,7 +52,7 @@ export function StackNav() {
                         //         <Text>{props.name}</Text>
                         //     </View>
                         // </TouchableOpacity>
-                    ),
+                        ),
                     })
                 }
             

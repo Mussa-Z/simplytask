@@ -26,7 +26,7 @@ export function TopNavBar() {
 const styles = StyleSheet.create({
     iconButton: {
         flex: 1,
-        paddingRight: '10%',
+        marginRight: '16%',
         alignItems: 'center',
         justifyContent: 'center',
     },
