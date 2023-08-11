@@ -13,7 +13,6 @@ export function ListsDrawer({route, navigation}) {
     const {theme, setTheme} = useContext(ThemeContext);
     return (
       <Drawer.Navigator
-        screenOptions={{backgroundColor: 'yellow'}}
         initialRouteName='List'
         drawerContent={(props) => <ListsDrawerContent {...props} />}
       >
@@ -23,8 +22,10 @@ export function ListsDrawer({route, navigation}) {
           initialParams={{listName: 'No List Selected'}}
           options={
             ({ route, navigation }) => ({ 
-              headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1, },
+              headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1},
               headerTitle: route.params.listName,
+              headerTintColor: theme.primaryText,
+              headerShadowVisible: true,
               headerRight: (props) => (
                 <IconButton
                   title="plus"

@@ -25,7 +25,7 @@ export function ListName(props) {
 export function Task(props) {
     const {theme, setTheme} = useContext(ThemeContext);
     return(
-        <View style={[styles.taskCard, {borderColor: theme.borderColour}]}>
+        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
             <TouchableOpacity 
                 style={styles.taskCircleTouch}
                 onPress={() => {
@@ -40,7 +40,7 @@ export function Task(props) {
                     alert('you touched the task');
                 }}
             >
-                <Text numberOfLines={1} style={styles.taskText}>{props.taskName}</Text>
+                <Text numberOfLines={1} style={[styles.taskText, {color: theme.primaryText}]}>{props.taskName}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -63,13 +63,13 @@ const styles = StyleSheet.create({
         marginTop: '4%',
         marginLeft: '4%',
         marginRight: '4%',
-        borderWidth: 1,
+        borderRadius: 10
     },
     taskCircleTouch: {
         // backgroundColor:'red', 
         width: '10%', 
         height: '100%', 
-        alignItems: 'flex-start', 
+        alignItems: 'center', 
         justifyContent: 'center'
     },
     taskCircle: {
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
         marginRight: '3%'
     },
     taskText: {
-        color: 'black',
         fontSize: 16,
         textAlign: 'left',
         zIndex: 1,

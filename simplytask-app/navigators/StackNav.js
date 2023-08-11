@@ -5,6 +5,7 @@ import { BottomTabs } from './BottomTabs';
 import { DetailsScreen } from '../screens/DetailsScreen';
 import { CreateNewListScreen } from '../screens/CreateNewListScreen';
 import { ListContext, ListDataContext } from '../common/list-context';
+import { ThemeContext } from '../common/theme-context';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,10 +14,13 @@ export function StackNav() {
     const {currentList, setCurrentList} = useContext(ListContext);
     const {listData, setListData} = useContext(ListDataContext);
     const updatedListsData = [...listData];
+    const {theme, setTheme} = useContext(ThemeContext);
 
     return(
         <Stack.Navigator
-            screenOptions={{headerBackTitle: 'Back', headerBackTitleVisible: true}}
+            screenOptions={{headerBackTitle: 'Back', headerBackTitleVisible: true,
+                            headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1}
+                          }}
         >
             <Stack.Screen options={{headerShown: false}} name="BottomMenuWrapper" component={BottomTabs} />
             <Stack.Screen name="Details" component={DetailsScreen} />

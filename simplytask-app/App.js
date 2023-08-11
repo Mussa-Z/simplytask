@@ -11,7 +11,7 @@ import { StackNav } from './navigators/StackNav';
 
 export default function App() {
 
-  const [theme, setTheme] = useState(themes.light);
+  const [theme, setTheme] = useState(themes.dark);
   const selectedTheme = useMemo(
     () => ({theme, setTheme}),
     [theme]
@@ -37,7 +37,7 @@ export default function App() {
 
         <ListDataContext.Provider value={lists}>
 
-          <SafeAreaView style={styles.safeView}>
+          <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
 
             <TopNavBar></TopNavBar>
 
@@ -60,7 +60,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeView: {
     flex: 1,
-    backgroundColor: 'red',
     width: '100%'
   },
 });

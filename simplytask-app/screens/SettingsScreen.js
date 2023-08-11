@@ -1,8 +1,11 @@
 import { StyleSheet, View, Text } from 'react-native';
+import { useContext } from 'react';
+import { ThemeContext } from '../common/theme-context';
 
 export function SettingsScreen( { navigation }) {
+    const {theme, setTheme} = useContext(ThemeContext);
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor:theme.background}]}>
         <Text>Settings Screen</Text>
       </View>
     );
@@ -11,7 +14,6 @@ export function SettingsScreen( { navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -9,6 +9,13 @@ export const themes = {
         interactiveText: '#036ebe',
         disabledText: '#d0d8dc',
         borderColour: '#b5bebd',
+        // update below
+        cardBackground: '#4b5961',
+        buttonColorful: '#98dab6',
+        buttonColorfulText: '#222222',
+        buttonNeutral: '#5f6c73',
+        buttonNeutralText: '#e5e6e8',
+        drawerBackground: '#5f6c73',
     },
     light: {
         background: '#dee4e7',
@@ -18,6 +25,13 @@ export const themes = {
         interactiveText: '#036ebe',
         disabledText: '#d0d8dc',
         borderColour: '#b5bebd',
+        // update below
+        cardBackground: '#4b5961',
+        buttonColorful: '#98dab6',
+        buttonColorfulText: '#222222',
+        buttonNeutral: '#5f6c73',
+        buttonNeutralText: '#e5e6e8',
+        drawerBackground: '#5f6c73',
     },
     dark: {
         background: '#37474f',
@@ -26,7 +40,13 @@ export const themes = {
         errorText: '#ffffff',
         interactiveText: '#ffffff',
         disabledText: '#d0d8dc',
-        borderColour: '#b5bebd',
+        borderColour: '#3b4951',
+        cardBackground: '#4b5961',
+        buttonColorful: '#98dab6',
+        buttonColorfulText: '#222222',
+        buttonNeutral: '#5f6c73',
+        buttonNeutralText: '#e5e6e8',
+        drawerBackground: '#5f6c73',
     },
     black: {
         background: '#222222',
@@ -36,6 +56,13 @@ export const themes = {
         interactiveText: '#ffffff',
         disabledText: '#d0d8dc',
         borderColour: '#b5bebd',
+        // update below
+        cardBackground: '#4b5961',
+        buttonColorful: '#98dab6',
+        buttonColorfulText: '#222222',
+        buttonNeutral: '#5f6c73',
+        buttonNeutralText: '#e5e6e8',
+        drawerBackground: '#5f6c73',
     }
 };
 
