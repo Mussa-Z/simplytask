@@ -14,6 +14,16 @@ export function IconButton(props) {
     );
 }
 
+/** TEXT BUTTON COMPONENT */
+export function TextButton(props){
+    const {theme, setTheme} = useContext(ThemeContext);
+    return(
+        <TouchableOpacity style={styles.iconButton} onPress={props.onPress}>
+            <Text style={[styles.textButtonText, {color: theme.primaryText}]}>{props.text}</Text>
+        </TouchableOpacity>
+    );
+}
+
 /** TOP NAV BAR */
 export function TopNavBar() {
     const {theme, setTheme} = useContext(ThemeContext);
@@ -23,8 +33,8 @@ export function TopNavBar() {
                 source={require('../assets/images/avatars/02.png')}
                 style={styles.avatarImage}
             />
-            <View style={styles.karmaCounterBg}>
-                <Text style={{color:theme.primaryText}}>00</Text>
+            <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
+                <Text style={{color:theme.buttonNeutralText}}>0</Text>
             </View>
             
       </View>
@@ -42,6 +52,9 @@ const styles = StyleSheet.create({
         width: 16,
         height: 16,
     },
+    textButtonText: {
+        fontSize: 28,
+    },
     topBar: {
         // backgroundColor: '#DDCECE', // DEBUG: 'red'
         height: 65,
@@ -56,7 +69,6 @@ const styles = StyleSheet.create({
         marginLeft: '4%'
     },
     karmaCounterBg: {
-        backgroundColor: '#3fa3bd',
         width: 40,
         height: 20,
         borderRadius: 20,

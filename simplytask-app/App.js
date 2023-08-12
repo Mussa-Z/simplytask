@@ -5,8 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { TopNavBar } from './components/Navigation';
 import { themes, ThemeContext } from './common/theme-context';
 import { ListContext, ListDataContext } from './common/list-context';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { StackNav } from './navigators/StackNav';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import defaultData from './assets/data/defaultData.json';
 
 
 export default function App() {
@@ -17,25 +19,45 @@ export default function App() {
     [theme]
   );
 
-  const [currentList, setCurrentList] = useState('No List Selected');
+  const [currentList, setCurrentList] = useState('');
   const currentListName = useMemo(
     () => ({currentList, setCurrentList}),
     [currentList]
   );
 
-  const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
-  const [listData, setListData] = useState(startingData);
-  const lists = useMemo(
+  // const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
+  // const [listData, setListData] = useState(startingData);
+  const [listData, setListData] = useState(defaultData.data);
+  const data = useMemo(
     () => ({listData, setListData}),
     [listData]
   );
+
+  // load data from local storage or default data if none available on first load
+  useEffect(() => { //useEffect to make sure DOM elements are loaded before getting data
+    if (listData.length == 0) {
+      AsyncStorage.getItem('@simplyTaskData').then((obj) => {
+        if(obj != null) {
+          setListData(JSON.parse(obj));
+          console.log('wrote data from ASYNC storage');
+        } else {
+          AsyncStorage.setItem('@simplyTaskData', 
+            JSON.stringify(defaultData.data)).then(() => {
+              console.log('wrote default data to local storage');
+            });
+        }
+      }).catch((err) => {
+        console.log('an error occured while reading async storage');
+      });
+    }
+  }, []);
 
   return (
     <ThemeContext.Provider value={selectedTheme}>
 
       <ListContext.Provider value={currentListName}>
 
-        <ListDataContext.Provider value={lists}>
+        <ListDataContext.Provider value={data}>
 
           <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
 

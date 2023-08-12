@@ -12,7 +12,10 @@ export function BottomTabs() {
   const {theme, setTheme} = useContext(ThemeContext);
   return(
     <Tab.Navigator
-      screenOptions={{tabBarStyle: {backgroundColor: theme.background}, headerStyle: {backgroundColor: theme.background}, headerTintColor: theme.primaryText,}}
+      screenOptions={{tabBarStyle: {backgroundColor: theme.background, borderTopColor: theme.borderColour, borderTopWidth: 1},
+                      tabBarActiveTintColor: theme.buttonColorful, 
+                      headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1}, 
+                      headerTintColor: theme.primaryText,}}
     >
       <Tab.Screen 
         options={{headerShown: false}} 

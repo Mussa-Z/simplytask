@@ -1,17 +1,38 @@
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { useContext } from "react";
-import { ListContext } from "../common/list-context";
+import { ListContext, ListDataContext } from "../common/list-context";
 import { ThemeContext } from "../common/theme-context";
+
+
 
 /** LIST NAME COMPONENT */
 export function ListName(props) {
-    const {currentList, setCurrentList} = useContext(ListContext);
+    // const {currentList, setCurrentList} = useContext(ListContext);
+    const {listData, setListData} = useContext(ListDataContext);
+    const updatedListData = {...listData};
+    const {theme, setTheme} = useContext(ThemeContext);
+
+    // return(
+    //     <TouchableOpacity
+    //         style={currentList == props.name ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
+    //         onPress={ () => {
+    //             setCurrentList(props.name);
+    //             props.navigation.navigate('List', {listName: props.name});
+    //         }}
+    //     >
+    //         <View>
+    //             <Text>{props.name}</Text>
+    //         </View>
+    //   </TouchableOpacity>
+    // );
     return(
         <TouchableOpacity
-            style={currentList == props.name ? styles.activeItem : styles.item}
+            style={listData.selectedList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
             onPress={ () => {
-                setCurrentList(props.name);
-                props.navigation.navigate('List', {listName: props.name});
+                updatedListData.selectedList.listID = props.id;
+                updatedListData.selectedList.listName = props.name;
+                setListData(updatedListData);
+                props.navigation.navigate('List', {listID: props.id, listName: props.name});
             }}
         >
             <View>
@@ -36,9 +57,7 @@ export function Task(props) {
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.taskTextTouch}
-                onPress={() => {
-                    alert('you touched the task');
-                }}
+                onPress={props.detailsOnPress}
             >
                 <Text numberOfLines={1} style={[styles.taskText, {color: theme.primaryText}]}>{props.taskName}</Text>
             </TouchableOpacity>
@@ -53,7 +72,7 @@ const styles = StyleSheet.create({
     },
     activeItem: {
         padding: 16,
-        backgroundColor: '#f0f0f0',
+        // backgroundColor: '#f0f0f0',
     },
     taskCard: {
         width: '92%',
@@ -67,10 +86,11 @@ const styles = StyleSheet.create({
     },
     taskCircleTouch: {
         // backgroundColor:'red', 
-        width: '10%', 
+        width: '8%', 
         height: '100%', 
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: '2%',
     },
     taskCircle: {
         width: 32,

@@ -1,0 +1,33 @@
+{
+    "data": {
+        "lists": [
+            {
+                "listID": 1,
+                "listName": "My SimplyTask To Dos",
+                "tasks": [
+                    {
+                        "taskID": 1,
+                        "taskName": "Explore the app"
+                    },
+                    {
+                        "taskID": 2,
+                        "taskName": "Complete my first task"
+                    },
+                    {
+                        "taskID": 3,
+                        "taskName": "Add my first task"
+                    },
+                    {
+                        "taskID": 4,
+                        "taskName": "Add my first list"
+                    }
+                ]
+            }
+        ],
+        "selectedList": {
+            "listID": 1,
+            "listName": "My SimplyTask To Dos"
+        }
+    }
+
+}

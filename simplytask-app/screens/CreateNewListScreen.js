@@ -18,7 +18,8 @@ export function CreateNewListScreen( { route, navigation }) {
         <TextInput
             ref={textInputRef} 
             placeholder='Enter list name'
-            style={styles.inputText}
+            placeholderTextColor={theme.disabledText}
+            style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText}]}
             onChangeText={(text) => {
                 navigation.setParams({
                     listName: text
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
         // borderColor: "#3fa3bd",
         height: 45,
         fontSize: 16,
-        backgroundColor: "white",
         textAlign: 'left',
         paddingLeft: 10
     },

@@ -39,8 +39,8 @@ export const themes = {
         secondaryText: '#afbec4',
         errorText: '#ffffff',
         interactiveText: '#ffffff',
-        disabledText: '#d0d8dc',
-        borderColour: '#3b4951',
+        disabledText: '#5f7073',
+        borderColour: '#98dab6',  //3b4951
         cardBackground: '#4b5961',
         buttonColorful: '#98dab6',
         buttonColorfulText: '#222222',
