@@ -7,9 +7,10 @@ import { ThemeContext } from "../common/theme-context";
 
 /** LIST NAME COMPONENT */
 export function ListName(props) {
-    // const {currentList, setCurrentList} = useContext(ListContext);
-    const {listData, setListData} = useContext(ListDataContext);
-    const updatedListData = {...listData};
+    const {currentList, setCurrentList} = useContext(ListContext);
+    const updatedCurrentList = {...currentList};
+    // const {listData, setListData} = useContext(ListDataContext);
+    // const updatedListData = {...listData};
     const {theme, setTheme} = useContext(ThemeContext);
 
     // return(
@@ -25,13 +26,31 @@ export function ListName(props) {
     //         </View>
     //   </TouchableOpacity>
     // );
+    // return(
+    //     <TouchableOpacity
+    //         style={listData.selectedList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
+    //         onPress={ () => {
+    //             updatedListData.selectedList.listID = props.id;
+    //             updatedListData.selectedList.listName = props.name;
+    //             console.log(updatedListData.selectedList);
+    //             setListData(updatedListData);
+    //             props.navigation.navigate('List', {listID: props.id, listName: props.name});
+    //         }}
+    //     >
+    //         <View>
+    //             <Text>{props.name}</Text>
+    //         </View>
+    //   </TouchableOpacity>
+    // );
     return(
         <TouchableOpacity
-            style={listData.selectedList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
+            style={currentList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
             onPress={ () => {
-                updatedListData.selectedList.listID = props.id;
-                updatedListData.selectedList.listName = props.name;
-                setListData(updatedListData);
+                updatedCurrentList.listID = props.id;
+                updatedCurrentList.listName = props.name;
+                updatedCurrentList.listIndex = props.listIndex;
+                console.log(updatedCurrentList);
+                setCurrentList(updatedCurrentList);
                 props.navigation.navigate('List', {listID: props.id, listName: props.name});
             }}
         >

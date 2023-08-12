@@ -5,7 +5,7 @@ import { ListsDrawerContent } from './ListsDrawerContent';
 import { IconButton } from '../components/Navigation';
 import { TextButton } from '../components/Navigation';
 import { ThemeContext } from '../common/theme-context';
-import { ListDataContext } from '../common/list-context';
+import { ListContext, ListDataContext } from '../common/list-context';
 
 const Drawer = createDrawerNavigator();
 
@@ -13,7 +13,8 @@ export function ListsDrawer({route, navigation}) {
 
     // const additionalParams = {listNames: [...listsData], currentList: currentList, updateCurrentListCallback: updateCurrentListCallback}
     const {theme, setTheme} = useContext(ThemeContext);
-    const {listData, setListData} = useContext(ListDataContext);
+    // const {listData, setListData} = useContext(ListDataContext);
+    const {currentList, setCurrentList} = useContext(ListContext);
 
     return (
       <Drawer.Navigator
@@ -23,7 +24,7 @@ export function ListsDrawer({route, navigation}) {
         <Drawer.Screen 
           name="List" 
           component={ListScreen} 
-          initialParams={{listID: listData.selectedList.listID, listName: listData.selectedList.listName}}
+          initialParams={{listID: currentList.listID, listName: currentList.listName}}
           options={
             ({ route, navigation }) => ({ 
               headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1},

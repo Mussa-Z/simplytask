@@ -19,7 +19,7 @@ export default function App() {
     [theme]
   );
 
-  const [currentList, setCurrentList] = useState('');
+  const [currentList, setCurrentList] = useState(defaultData.data.selectedList);
   const currentListName = useMemo(
     () => ({currentList, setCurrentList}),
     [currentList]
@@ -27,37 +27,37 @@ export default function App() {
 
   // const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
   // const [listData, setListData] = useState(startingData);
-  const [listData, setListData] = useState(defaultData.data);
-  const data = useMemo(
+  const [listData, setListData] = useState(defaultData.data.lists);
+  const lists = useMemo(
     () => ({listData, setListData}),
     [listData]
   );
 
   // load data from local storage or default data if none available on first load
-  useEffect(() => { //useEffect to make sure DOM elements are loaded before getting data
-    if (listData.length == 0) {
-      AsyncStorage.getItem('@simplyTaskData').then((obj) => {
-        if(obj != null) {
-          setListData(JSON.parse(obj));
-          console.log('wrote data from ASYNC storage');
-        } else {
-          AsyncStorage.setItem('@simplyTaskData', 
-            JSON.stringify(defaultData.data)).then(() => {
-              console.log('wrote default data to local storage');
-            });
-        }
-      }).catch((err) => {
-        console.log('an error occured while reading async storage');
-      });
-    }
-  }, []);
+  // useEffect(() => { //useEffect to make sure DOM elements are loaded before getting data
+  //   if (listData.length == 0) {
+  //     AsyncStorage.getItem('@simplyTaskData').then((obj) => {
+  //       if(obj != null) {
+  //         setListData(JSON.parse(obj));
+  //         console.log('wrote data from ASYNC storage');
+  //       } else {
+  //         AsyncStorage.setItem('@simplyTaskData', 
+  //           JSON.stringify(defaultData.data)).then(() => {
+  //             console.log('wrote default data to local storage');
+  //           });
+  //       }
+  //     }).catch((err) => {
+  //       console.log('an error occured while reading async storage');
+  //     });
+  //   }
+  // }, []);
 
   return (
     <ThemeContext.Provider value={selectedTheme}>
 
       <ListContext.Provider value={currentListName}>
 
-        <ListDataContext.Provider value={data}>
+        <ListDataContext.Provider value={lists}>
 
           <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
 

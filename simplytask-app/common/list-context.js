@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 export const ListContext = createContext({
-    currentList: '',
+    currentList: {},
     setCurrentList: () => {},
 });
 

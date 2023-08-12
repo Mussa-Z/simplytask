@@ -13,7 +13,8 @@ export function StackNav() {
 
     const {currentList, setCurrentList} = useContext(ListContext);
     const {listData, setListData} = useContext(ListDataContext);
-    const updatedListData = {...listData};
+    const updatedListData = [...listData];
+    const updatedCurrentList = {...currentList}
     const {theme, setTheme} = useContext(ThemeContext);
 
     return(
@@ -28,7 +29,7 @@ export function StackNav() {
             <Stack.Screen 
                 name="CreateNewList"
                 component={CreateNewListScreen}
-                initialParams={{listName: ''}}
+                initialParams={{listID: '', listName: ''}}
                 options={
                     ({ route, navigation }) => ({ 
                         headerTitle: 'Create new list',
@@ -43,16 +44,33 @@ export function StackNav() {
                                         // setListData(updatedListsData);
                                         // setCurrentList(route.params.listName);
                                         // navigation.navigate('List', {listName: route.params.listName})
-                                        const newListID = updatedListData.lists.length + 1;
+                                        /********************************************************* */
+                                        // const newListID = "list_" + new Date().getTime();
+                                        // const newListName = route.params.listName;
+                                        // const newListObj = {"listID": newListID, 
+                                        //                     "listName": newListName,
+                                        //                     "tasks": []}
+                                        // updatedListData.lists.push(newListObj);
+                                        // updatedListData.selectedList.listID = newListID;
+                                        // updatedListData.selectedList.listName = newListName;
+                                        // console.log(updatedListData);
+                                        // setListData(updatedListData);
+                                        // navigation.navigate('List', {listID: newListID, listName: newListName})
+                                        /********************************************************* */
+                                        const newListID = "list_" + new Date().getTime();
                                         const newListName = route.params.listName;
                                         const newListObj = {"listID": newListID, 
                                                             "listName": newListName,
                                                             "tasks": []}
-                                        updatedListData.lists.push(newListObj);
-                                        updatedListData.selectedList.listID = newListID;
-                                        updatedListData.selectedList.listName = newListName;
+                                        updatedListData.push(newListObj);
+                                        updatedCurrentList.listID = newListID;
+                                        updatedCurrentList.listName = newListName;
+                                        updatedCurrentList.listIndex = updatedListData.length - 1;
+                                        console.log(updatedListData);
+                                        console.log(updatedCurrentList);
                                         setListData(updatedListData);
-                                        navigation.navigate('List', {listID: newListID, listName: newListName})
+                                        setCurrentList(updatedCurrentList);
+                                        navigation.navigate('List', {listID: newListID, listName: newListName});
                                     }
 
                                 }}

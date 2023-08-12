@@ -1,24 +1,24 @@
 import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { useContext, useRef } from 'react';
 import { ThemeContext } from '../common/theme-context';
-import { ListDataContext } from '../common/list-context';
+import { ListContext, ListDataContext } from '../common/list-context';
 import { Task } from '../components/ListComponents';
 
 export function ListScreen( { route, navigation }) {
 
   const {theme, setTheme} = useContext(ThemeContext);
   const {listData, setListData} = useContext(ListDataContext);
-  const updatedListData = {...listData};
+  const {currentList, setCurrentList} = useContext(ListContext);
   const taskNameRef = useRef('');
 
-  const tasksArray = () => {
-    for (var i = updatedListData.lists.length - 1; i >= 0; i--) {
-      if (updatedListData.lists[i].listID = route.params.listID) {
-        return updatedListData.lists[i].tasks;
-      }
-      return [];
-    }
-  }
+  // const tasksArray = () => {
+  //   for (var i = listData.length - 1; i >= 0; i--) {
+  //     if (listData[i].listID == route.params.listID) {
+  //       return listData[i].tasks;
+  //     }
+  //     return [];
+  //   }
+  // }
 
   return (
     <KeyboardAvoidingView 
@@ -27,20 +27,10 @@ export function ListScreen( { route, navigation }) {
       style={[styles.container, { backgroundColor: theme.background}]}
     >
       {/* <View style={[styles.container, { backgroundColor: theme.background}]}> */}
-        <ScrollView>
-          {/* {tasksArray.length == 0 ? (<Text>No Tasks Yet</Text>) : 
-            tasksArray.map((element, index) => (
-              <Task
-                id={element.taskID}
-                taskName={element.taskName}
-                detailsOnPress = {() => {
-                  navigation.navigate('Details');
-                }}
-              ></Task>
-            ))
-          } */}
-
-            {updatedListData.lists[0].tasks.map((element, index) => (
+        <ScrollView contentContainerStyle={listData[currentList.listIndex].tasks.length == 0 ? {height: '100%', alignContent: 'center', justifyContent:'center'} : null}>
+          {console.log("listscreen route.params.listID: " + route.params.listID)}
+          {listData[currentList.listIndex].tasks.length == 0 ? <Text style={[styles.emptyTasksText, {color: theme.disabledText}]}>No Tasks Yet</Text> : 
+            listData[currentList.listIndex].tasks.map((element, index) => (
               <Task
                 key={element.taskID}
                 id={element.taskID}
@@ -49,7 +39,19 @@ export function ListScreen( { route, navigation }) {
                   navigation.navigate('Details');
                 }}
               ></Task>
-            ))}
+            ))
+          }
+
+            {/* {updatedListData.lists[0].tasks.map((element, index) => (
+              <Task
+                key={element.taskID}
+                id={element.taskID}
+                taskName={element.taskName}
+                detailsOnPress = {() => {
+                  navigation.navigate('Details');
+                }}
+              ></Task>
+            ))} */}
 
           {/* <Task
             taskName="Research dark and light theme colours"
@@ -118,5 +120,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1,
+    },
+    emptyTasksText: {
+      fontSize: 18,
+      textAlign: 'center',
     }
 });

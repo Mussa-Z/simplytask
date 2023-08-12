@@ -20,16 +20,41 @@ export function ListsDrawerContent(props) {
   //     ))}
   //   </DrawerContentScrollView>
   // );
+  // return(
+  //   <DrawerContentScrollView style={{backgroundColor: theme.drawerBackground}} {...props}>
+  //     {listData.lists.map((element, index) => 
+  //       {
+  //         console.log('drawer content:' + element.listID);
+  //         return (
+  //           <ListName
+  //             key={index}
+  //             id={element.listID}
+  //             name={element.listName}
+  //             navigation={props.navigation}
+  //           ></ListName>
+  //         )
+  //       }
+
+  //     )}
+  //   </DrawerContentScrollView>
+  // );
   return(
     <DrawerContentScrollView style={{backgroundColor: theme.drawerBackground}} {...props}>
-      {listData.lists.map((element, index) => (
-        <ListName
-          key={element.listID}
-          id={element.listID}
-          name={element.listName}
-          navigation={props.navigation}
-        ></ListName>
-      ))}
+      {listData.map((element, index) => 
+        {
+          console.log('drawer content:' + element.listID + ' ' + element.listName);
+          return (
+            <ListName
+              key={element.listID}
+              id={element.listID}
+              listIndex={index}
+              name={element.listName}
+              navigation={props.navigation}
+            ></ListName>
+          )
+        }
+
+      )}
     </DrawerContentScrollView>
   );
 }
