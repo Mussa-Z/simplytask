@@ -19,7 +19,7 @@ export function TextButton(props){
     const {theme, setTheme} = useContext(ThemeContext);
     return(
         <TouchableOpacity style={styles.iconButton} onPress={props.onPress}>
-            <Text style={[styles.textButtonText, {color: theme.primaryText}]}>{props.text}</Text>
+            <Text style={[styles.textButtonText, {color: theme.buttonColorful}]}>{props.text}</Text>
         </TouchableOpacity>
     );
 }

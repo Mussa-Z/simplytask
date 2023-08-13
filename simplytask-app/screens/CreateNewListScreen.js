@@ -22,7 +22,6 @@ export function CreateNewListScreen( { route, navigation }) {
             style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText}]}
             onChangeText={(text) => {
                 navigation.setParams({
-                    listID: 'testID',
                     listName: text
                 });
             }}

@@ -6,6 +6,7 @@ import { IconButton } from '../components/Navigation';
 import { TextButton } from '../components/Navigation';
 import { ThemeContext } from '../common/theme-context';
 import { ListContext, ListDataContext } from '../common/list-context';
+import Icon from '@expo/vector-icons/Entypo';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,8 @@ export function ListsDrawer({route, navigation}) {
     return (
       <Drawer.Navigator
         initialRouteName='List'
+        screenOptions={{headerStyle: {backgroundColor: theme.background}, 
+                        headerTintColor: theme.primaryText}}
         drawerContent={(props) => <ListsDrawerContent {...props} />}
       >
         <Drawer.Screen 
@@ -27,10 +30,12 @@ export function ListsDrawer({route, navigation}) {
           initialParams={{listID: currentList.listID, listName: currentList.listName}}
           options={
             ({ route, navigation }) => ({ 
-              headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1},
               headerTitle: route.params.listName,
-              headerTintColor: theme.primaryText,
+              headerTitleContainerStyle: {width: '70%'},
+              headerTitleAlign: 'left',
+              // headerTintColor: theme.primaryText,
               headerShadowVisible: true,
+              headerRightContainerStyle: {width: '15%'},
               headerRight: (props) => (
                 // <IconButton
                 //   title="plus"
@@ -39,12 +44,33 @@ export function ListsDrawer({route, navigation}) {
                 //     navigation.navigate('CreateNewList');
                 //   }}
                 // ></IconButton>
-                <TextButton
-                  text="+"
+                // <TextButton
+                //   text="+"
+                //   onPress={() => {
+                //     navigation.navigate('CreateNewList', {taskName: ''});
+                //   }}
+                // ></TextButton>
+                <Icon
+                  style={{paddingRight: 14}}
+                  name="plus" 
+                  size={28} 
+                  color={theme.buttonColorful} 
                   onPress={() => {
-                    navigation.navigate('CreateNewList');
+                    navigation.navigate('CreateNewList', {taskName: ''});
                   }}
-                ></TextButton>
+                />
+              ),
+              headerLeftContainerStyle: {width: '15%'},
+              headerLeft: (props) => (
+                <Icon
+                  style={{paddingLeft: 14}} 
+                  name="menu" 
+                  size={28} 
+                  color={theme.buttonColorful} 
+                  onPress={() => {
+                    navigation.openDrawer();
+                  }}
+                />
               ),
             })
           }

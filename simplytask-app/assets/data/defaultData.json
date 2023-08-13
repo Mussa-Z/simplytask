@@ -7,19 +7,35 @@
                 "tasks": [
                     {
                         "taskID": "task_1",
-                        "taskName": "Explore the app"
+                        "taskName": "Explore the app",
+                        "dateAdded": "2023-08-12",
+                        "notes": ""
                     },
                     {
                         "taskID": "task_2",
-                        "taskName": "Complete my first task"
+                        "taskName": "Complete my first task",
+                        "dateAdded": "2023-08-12",
+                        "notes": ""
                     },
                     {
                         "taskID": "task_3",
-                        "taskName": "Add my first task"
+                        "taskName": "Add my first task",
+                        "dateAdded": "2023-08-12",
+                        "notes": ""
                     },
                     {
                         "taskID": "task_4",
-                        "taskName": "Add my first list"
+                        "taskName": "Add my first list",
+                        "dateAdded": "2023-08-12",
+                        "notes": ""
+                    }
+                ],
+                "completed": [
+                    {
+                        "taskID": "task_0",
+                        "taskName": "Download SimplyTask",
+                        "dateAdded": "2023-08-12",
+                        "notes": ""
                     }
                 ]
             }

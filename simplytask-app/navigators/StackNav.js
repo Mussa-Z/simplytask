@@ -1,4 +1,4 @@
-import { Button } from 'react-native';
+import { Button, Keyboard } from 'react-native';
 import { useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomTabs } from './BottomTabs';
@@ -20,16 +20,54 @@ export function StackNav() {
     return(
         <Stack.Navigator
             screenOptions={{headerBackTitle: 'Back', headerBackTitleVisible: true,
-                            headerStyle: {backgroundColor: theme.background, borderBottomColor: theme.borderColour, borderBottomWidth: 1},
+                            headerStyle: {backgroundColor: theme.background},
                             headerTintColor: theme.primaryText
                           }}
         >
             <Stack.Screen options={{headerShown: false}} name="BottomMenuWrapper" component={BottomTabs} />
-            <Stack.Screen name="Details" component={DetailsScreen} />
+
+            <Stack.Screen 
+                name="Details" 
+                component={DetailsScreen} 
+                initialParams={{taskObj: {}, hasChanged: false}}         
+                options={
+                    ({ route, navigation }) => ({ 
+                        headerTitle: 'Task Details',
+                        headerRight: (props) => (
+                            <Button 
+                                title='Save'
+                                disabled={route.params.hasChanged ? false : true}
+                                color={theme.buttonColorful}
+                                onPress={() => {
+                                    if (route.params.hasChanged){
+
+                                        const updatedTaskObj = route.params.taskObj;
+                                         
+                                        for (var i = updatedListData[currentList.listIndex].tasks.length - 1; i >= 0; i--) {
+                                            if (updatedListData[currentList.listIndex].tasks[i].taskID == updatedTaskObj.taskID) {
+                                                updatedListData[currentList.listIndex].tasks[i] = updatedTaskObj;
+                                                break;
+                                            }
+                                        }
+                                        setListData(updatedListData);
+                                        // navigation.navigate('List', {listID: currentList.listID, listName: currentList.listName});
+                                        Keyboard.dismiss();
+                                        navigation.setParams({
+                                            hasChanged: false,
+                                        });
+                                    }
+
+                                }}
+                        />
+                        ),
+                    })
+                }
+            />
+
             <Stack.Screen 
                 name="CreateNewList"
                 component={CreateNewListScreen}
-                initialParams={{listID: '', listName: ''}}
+                initialParams={{listName: ''}}
                 options={
                     ({ route, navigation }) => ({ 
                         headerTitle: 'Create new list',
@@ -40,28 +78,12 @@ export function StackNav() {
                                 color={theme.buttonColorful}
                                 onPress={() => {
                                     if (route.params.listName != ''){
-                                        // updatedListsData.push(route.params.listName);
-                                        // setListData(updatedListsData);
-                                        // setCurrentList(route.params.listName);
-                                        // navigation.navigate('List', {listName: route.params.listName})
-                                        /********************************************************* */
-                                        // const newListID = "list_" + new Date().getTime();
-                                        // const newListName = route.params.listName;
-                                        // const newListObj = {"listID": newListID, 
-                                        //                     "listName": newListName,
-                                        //                     "tasks": []}
-                                        // updatedListData.lists.push(newListObj);
-                                        // updatedListData.selectedList.listID = newListID;
-                                        // updatedListData.selectedList.listName = newListName;
-                                        // console.log(updatedListData);
-                                        // setListData(updatedListData);
-                                        // navigation.navigate('List', {listID: newListID, listName: newListName})
-                                        /********************************************************* */
                                         const newListID = "list_" + new Date().getTime();
                                         const newListName = route.params.listName;
                                         const newListObj = {"listID": newListID, 
                                                             "listName": newListName,
-                                                            "tasks": []};
+                                                            "tasks": [],
+                                                            "completed": []};
                                         updatedListData.push(newListObj);
                                         updatedCurrentList.listID = newListID;
                                         updatedCurrentList.listName = newListName;
@@ -75,17 +97,6 @@ export function StackNav() {
 
                                 }}
                         />
-                        // <TouchableOpacity
-                        //     style={currentList == props.name ? styles.activeItem : styles.item}
-                        //     onPress={ () => {
-                        //         setCurrentList(props.name);
-                        //         props.navigation.navigate('List', {listName: props.name});
-                        //     }}
-                        // >
-                        //     <View>
-                        //         <Text>{props.name}</Text>
-                        //     </View>
-                        // </TouchableOpacity>
                         ),
                     })
                 }

@@ -9,39 +9,8 @@ import { ThemeContext } from "../common/theme-context";
 export function ListName(props) {
     const {currentList, setCurrentList} = useContext(ListContext);
     const updatedCurrentList = {...currentList};
-    // const {listData, setListData} = useContext(ListDataContext);
-    // const updatedListData = {...listData};
     const {theme, setTheme} = useContext(ThemeContext);
 
-    // return(
-    //     <TouchableOpacity
-    //         style={currentList == props.name ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
-    //         onPress={ () => {
-    //             setCurrentList(props.name);
-    //             props.navigation.navigate('List', {listName: props.name});
-    //         }}
-    //     >
-    //         <View>
-    //             <Text>{props.name}</Text>
-    //         </View>
-    //   </TouchableOpacity>
-    // );
-    // return(
-    //     <TouchableOpacity
-    //         style={listData.selectedList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
-    //         onPress={ () => {
-    //             updatedListData.selectedList.listID = props.id;
-    //             updatedListData.selectedList.listName = props.name;
-    //             console.log(updatedListData.selectedList);
-    //             setListData(updatedListData);
-    //             props.navigation.navigate('List', {listID: props.id, listName: props.name});
-    //         }}
-    //     >
-    //         <View>
-    //             <Text>{props.name}</Text>
-    //         </View>
-    //   </TouchableOpacity>
-    // );
     return(
         <TouchableOpacity
             style={currentList.listID == props.id ? [styles.activeItem, {backgroundColor: theme.buttonColorful}] : styles.item}
@@ -63,13 +32,24 @@ export function ListName(props) {
 
 /** TASK COMPONENT */
 export function Task(props) {
+    const {listData, setListData} = useContext(ListDataContext);
+    const updatedListData = [...listData];
+    const {currentList, setCurrentList} = useContext(ListContext);
     const {theme, setTheme} = useContext(ThemeContext);
     return(
         <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
             <TouchableOpacity 
                 style={styles.taskCircleTouch}
-                onPress={() => {
-                    alert('you checked off the task');
+                onPress={() => {                                        
+                    for (var i = updatedListData[currentList.listIndex].tasks.length - 1; i >= 0; i--) {
+                        if (updatedListData[currentList.listIndex].tasks[i].taskID == props.id) {
+                            const completedTaskObj = updatedListData[currentList.listIndex].tasks[i];
+                            updatedListData[currentList.listIndex].tasks.splice(i, 1);
+                            updatedListData[currentList.listIndex].completed.push(completedTaskObj);
+                            break;
+                        }
+                    }
+                    setListData(updatedListData);
                 }}
             >
                 <View style={[styles.taskCircle, {borderColor: theme.borderColour}]}></View>
@@ -80,6 +60,21 @@ export function Task(props) {
             >
                 <Text numberOfLines={1} style={[styles.taskText, {color: theme.primaryText}]}>{props.taskName}</Text>
             </TouchableOpacity>
+        </View>
+    );
+}
+
+/** COMPLETED TASK COMPONENT */
+export function CompletedTask(props) {
+    const {theme, setTheme} = useContext(ThemeContext);
+    return(
+        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
+            <View style={styles.taskCircleTouch}>
+                <View style={[styles.taskCircle, {backgroundColor: theme.background, borderColor: theme.borderColour}]}></View>
+            </View>
+            <View style={styles.taskTextTouch}>
+                <Text numberOfLines={1} style={[styles.completedTaskText, {color: theme.disabledText, }]}>{props.taskName}</Text>
+            </View>
         </View>
     );
 }
@@ -95,7 +90,7 @@ const styles = StyleSheet.create({
     },
     taskCard: {
         width: '92%',
-        height: 64,
+        height: 48,
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: '4%',
@@ -131,5 +126,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'left',
         zIndex: 1,
+    },
+    completedTaskText: {
+        fontSize: 16,
+        textAlign: 'left',
+        // textDecorationLine: 'line-through', 
+        // textDecorationStyle: 'solid'
     }
 });
