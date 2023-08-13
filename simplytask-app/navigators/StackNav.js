@@ -61,7 +61,7 @@ export function StackNav() {
                                         const newListName = route.params.listName;
                                         const newListObj = {"listID": newListID, 
                                                             "listName": newListName,
-                                                            "tasks": []}
+                                                            "tasks": []};
                                         updatedListData.push(newListObj);
                                         updatedCurrentList.listID = newListID;
                                         updatedCurrentList.listName = newListName;

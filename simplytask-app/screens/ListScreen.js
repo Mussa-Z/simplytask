@@ -1,5 +1,5 @@
-import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { useContext, useRef } from 'react';
+import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native';
+import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from '../common/theme-context';
 import { ListContext, ListDataContext } from '../common/list-context';
 import { Task } from '../components/ListComponents';
@@ -8,8 +8,10 @@ export function ListScreen( { route, navigation }) {
 
   const {theme, setTheme} = useContext(ThemeContext);
   const {listData, setListData} = useContext(ListDataContext);
+  const updatedListData = [...listData];
   const {currentList, setCurrentList} = useContext(ListContext);
-  const taskNameRef = useRef('');
+  // const taskNameRef = useRef('');
+  const [taskInputText, setTaskInputText] = useState('');
 
   // const tasksArray = () => {
   //   for (var i = listData.length - 1; i >= 0; i--) {
@@ -74,16 +76,31 @@ export function ListScreen( { route, navigation }) {
                 placeholderTextColor={theme.disabledText}
                 style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText}]}
                 onChangeText={(text) => {
-                    taskNameRef.current = text;
+                    // taskNameRef.current = text;
+                    setTaskInputText(text);
                 }}
+                defaultValue={taskInputText}
             />
             <TouchableOpacity 
               style={[styles.addButton, {backgroundColor: theme.buttonColorful}]}
               onPress={() => {
-                alert('add task button pressed');
+                if (taskInputText != '') {
+                  const newTaskID = "task_" + new Date().getTime();
+                  const newTaskName = taskInputText;
+                  const dateAdded = new Date();
+                  const newTaskObj = {"taskID": newTaskID, 
+                                      "taskName": newTaskName,
+                                      "dateAdded": dateAdded,
+                                      "Notes": ''};
+                  console.log(newTaskObj);
+                  updatedListData[currentList.listIndex].tasks.push(newTaskObj);
+                  setListData(updatedListData);
+                  Keyboard.dismiss();
+                  setTaskInputText('');
+                }
               }}
             >
-                <Text style={{color:theme.buttonColorfulText}}>add</Text>
+                <Text style={taskInputText == '' ? {color:theme.disabledText} : {color:theme.buttonColorfulText}}>add</Text>
             </TouchableOpacity>
         </View>
       {/* </View> */}
