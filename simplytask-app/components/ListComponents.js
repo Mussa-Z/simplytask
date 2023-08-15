@@ -32,7 +32,7 @@ export function ListName(props) {
 
 /** TASK COMPONENT */
 export function Task(props) {
-    const {listData, setListData} = useContext(ListDataContext);
+    const {listData, setListData, saveListData} = useContext(ListDataContext);
     const updatedListData = [...listData];
     const {currentList, setCurrentList} = useContext(ListContext);
     const {theme, setTheme} = useContext(ThemeContext);
@@ -50,6 +50,7 @@ export function Task(props) {
                         }
                     }
                     setListData(updatedListData);
+                    saveListData(updatedListData);
                 }}
             >
                 <View style={[styles.taskCircle, {borderColor: theme.borderColour}]}></View>

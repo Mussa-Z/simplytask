@@ -8,7 +8,7 @@ import moment from 'moment';
 export function ListScreen( { route, navigation }) {
 
   const {theme, setTheme} = useContext(ThemeContext);
-  const {listData, setListData} = useContext(ListDataContext);
+  const {listData, setListData, saveListData} = useContext(ListDataContext);
   const updatedListData = [...listData];
   const {currentList, setCurrentList} = useContext(ListContext);
   const [taskInputText, setTaskInputText] = useState('');
@@ -61,6 +61,7 @@ export function ListScreen( { route, navigation }) {
                 console.log(newTaskObj);
                 updatedListData[currentList.listIndex].tasks.push(newTaskObj);
                 setListData(updatedListData);
+                saveListData(updatedListData);
                 Keyboard.dismiss();
                 setTaskInputText('');
               }

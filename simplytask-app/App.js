@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { TopNavBar } from './components/Navigation';
 import { themes, ThemeContext } from './common/theme-context';
 import { ListContext, ListDataContext } from './common/list-context';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { StackNav } from './navigators/StackNav';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import defaultData from './assets/data/defaultData.json';
@@ -25,11 +25,16 @@ export default function App() {
     [currentList]
   );
 
+  const saveListData = useCallback((listDataArray) => {
+    console.log("I just received a request to save data. Request Acknowledged.")
+  }, []);
+  
+
   // const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
   // const [listData, setListData] = useState(startingData);
   const [listData, setListData] = useState(defaultData.data.lists);
   const lists = useMemo(
-    () => ({listData, setListData}),
+    () => ({listData, setListData, saveListData}),
     [listData]
   );
 

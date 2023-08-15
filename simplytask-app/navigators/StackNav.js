@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 export function StackNav() {
 
     const {currentList, setCurrentList} = useContext(ListContext);
-    const {listData, setListData} = useContext(ListDataContext);
+    const {listData, setListData, saveListData} = useContext(ListDataContext);
     const updatedListData = [...listData];
     const updatedCurrentList = {...currentList}
     const {theme, setTheme} = useContext(ThemeContext);
@@ -92,6 +92,7 @@ export function StackNav() {
                                         console.log(updatedCurrentList);
                                         setListData(updatedListData);
                                         setCurrentList(updatedCurrentList);
+                                        saveListData(updatedListData);
                                         navigation.navigate('List', {listID: newListID, listName: newListName});
                                     }
 

@@ -33,9 +33,16 @@ export function TopNavBar() {
                 source={require('../assets/images/avatars/02.png')}
                 style={styles.avatarImage}
             />
-            <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
-                <Text style={{color:theme.buttonNeutralText}}>0</Text>
+            <View style={styles.coinsContainer}>
+                <Image
+                    source={require('../assets/images/triskelion.png')}
+                    style={styles.coinImage}
+                />
+                <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
+                    <Text style={{color:theme.buttonNeutralText}}>0</Text>
+                </View>
             </View>
+
             
       </View>
     );
@@ -61,6 +68,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    coinsContainer: {
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    coinImage: {
+        width: 32,
+        height: 32,
+        borderRadius: 16,
     },
     avatarImage: {
         width: 48,
