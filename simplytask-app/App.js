@@ -5,10 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { TopNavBar } from './components/Navigation';
 import { themes, ThemeContext } from './common/theme-context';
 import { ListContext, ListDataContext } from './common/list-context';
+import { SettingsContext } from './common/settings-context';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { StackNav } from './navigators/StackNav';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import defaultData from './assets/data/defaultData.json';
+import { DEFAULT_SETTINGS } from './common/settings-data';
 
 
 export default function App() {
@@ -28,6 +30,10 @@ export default function App() {
   const saveListData = useCallback((listDataArray) => {
     console.log("I just received a request to save data. Request Acknowledged.")
   }, []);
+
+  const saveSettingsData = useCallback((settingsDataObj) => {
+    console.log("I just received a request to save settings data. Request Acknowledged.")
+  }, []);
   
 
   // const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
@@ -36,6 +42,12 @@ export default function App() {
   const lists = useMemo(
     () => ({listData, setListData, saveListData}),
     [listData]
+  );
+
+  const [settingsData, setSettingsData] = useState(DEFAULT_SETTINGS);
+  const settings = useMemo(
+    () => ({settingsData, setSettingsData, saveSettingsData}),
+    [settingsData]
   );
 
   // load data from local storage or default data if none available on first load
@@ -64,17 +76,21 @@ export default function App() {
 
         <ListDataContext.Provider value={lists}>
 
-          <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
+          <SettingsContext.Provider value={settings}>
 
-            <TopNavBar></TopNavBar>
+            <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
 
-            <NavigationContainer>
+              <TopNavBar></TopNavBar>
 
-                <StackNav></StackNav>
+              <NavigationContainer>
 
-            </NavigationContainer>
+                  <StackNav></StackNav>
 
-          </SafeAreaView>
+              </NavigationContainer>
+
+            </SafeAreaView>
+
+          </SettingsContext.Provider>
 
         </ListDataContext.Provider>
 

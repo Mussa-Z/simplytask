@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useContext } from "react";
 import { ThemeContext } from "../common/theme-context";
+import { SettingsContext } from "../common/settings-context";
 
 /** ICON BUTTON COMPONENT */
 export function IconButton(props) {
@@ -26,11 +27,19 @@ export function TextButton(props){
 
 /** TOP NAV BAR */
 export function TopNavBar() {
+
     const {theme, setTheme} = useContext(ThemeContext);
+    const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
+    // const imgPath = '../assets/images/avatars/' + settingsData.chosenAvatar.fname;
+    // const imgData = {
+    //     imgName: 'Default',
+    //     uri: require('../assets/images/avatars/01.png')
+    // }
+
     return (
         <View style ={[styles.topBar, {backgroundColor: theme.background}]}>
             <Image
-                source={require('../assets/images/avatars/02.png')}
+                source={settingsData.chosenAvatar.uri}
                 style={styles.avatarImage}
             />
             <View style={styles.coinsContainer}>
@@ -39,7 +48,7 @@ export function TopNavBar() {
                     style={styles.coinImage}
                 />
                 <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
-                    <Text style={{color:theme.buttonNeutralText}}>0</Text>
+                    <Text style={[styles.karmaCounterText, {color:theme.buttonNeutralText}]}>0</Text>
                 </View>
             </View>
 
@@ -69,6 +78,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    avatarImage: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        marginLeft: '4%'
+    },
     coinsContainer: {
         flexDirection: "row",
         alignItems: 'center',
@@ -78,20 +93,20 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         borderRadius: 16,
-    },
-    avatarImage: {
-        width: 48,
-        height: 48,
-        borderRadius: 24,
-        marginLeft: '4%'
+        zIndex: 1,
+        position: 'absolute',
+        right: 35
+        
     },
     karmaCounterBg: {
         width: 40,
         height: 20,
         borderRadius: 20,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
         marginRight: '4%',
-        zIndex: 1,
+    },
+    karmaCounterText : {
+        paddingRight: 10,
     },
 });
