@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { useContext } from "react";
 import { ListContext, ListDataContext } from "../common/list-context";
 import { ThemeContext } from "../common/theme-context";
+import { SettingsContext } from "../common/settings-context";
 
 
 
@@ -10,6 +11,7 @@ export function ListName(props) {
     const {currentList, setCurrentList} = useContext(ListContext);
     const updatedCurrentList = {...currentList};
     const {theme, setTheme} = useContext(ThemeContext);
+    
 
     return(
         <TouchableOpacity
@@ -36,6 +38,9 @@ export function Task(props) {
     const updatedListData = [...listData];
     const {currentList, setCurrentList} = useContext(ListContext);
     const {theme, setTheme} = useContext(ThemeContext);
+    const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
+    const updatedSettingsData = {...settingsData};
+
     return(
         <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
             <TouchableOpacity 
@@ -46,11 +51,15 @@ export function Task(props) {
                             const completedTaskObj = updatedListData[currentList.listIndex].tasks[i];
                             updatedListData[currentList.listIndex].tasks.splice(i, 1);
                             updatedListData[currentList.listIndex].completed.push(completedTaskObj);
+                            updatedSettingsData.karma += 1;
+
                             break;
                         }
                     }
                     setListData(updatedListData);
                     saveListData(updatedListData);
+                    setSettingsData(updatedSettingsData);
+                    saveSettingsData(updatedSettingsData);
                 }}
             >
                 <View style={[styles.taskCircle, {borderColor: theme.borderColour}]}></View>

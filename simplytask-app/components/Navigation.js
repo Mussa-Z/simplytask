@@ -30,11 +30,6 @@ export function TopNavBar() {
 
     const {theme, setTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
-    // const imgPath = '../assets/images/avatars/' + settingsData.chosenAvatar.fname;
-    // const imgData = {
-    //     imgName: 'Default',
-    //     uri: require('../assets/images/avatars/01.png')
-    // }
 
     return (
         <View style ={[styles.topBar, {backgroundColor: theme.background}]}>
@@ -48,7 +43,7 @@ export function TopNavBar() {
                     style={styles.coinImage}
                 />
                 <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
-                    <Text style={[styles.karmaCounterText, {color:theme.buttonNeutralText}]}>0</Text>
+                    <Text style={[styles.karmaCounterText, {color:theme.buttonNeutralText}]}>{settingsData.karma}</Text>
                 </View>
             </View>
 
@@ -95,11 +90,11 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         zIndex: 1,
         position: 'absolute',
-        right: 35
+        right: 45
         
     },
     karmaCounterBg: {
-        width: 40,
+        width: 60,
         height: 20,
         borderRadius: 20,
         alignItems: 'flex-end',

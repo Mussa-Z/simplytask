@@ -80,8 +80,11 @@ export default function App() {
 
             <SafeAreaView style={[styles.safeView, {backgroundColor: theme.background}]}>
 
-              <TopNavBar></TopNavBar>
-
+              {
+                settingsData.distractionFree == false ?
+                <TopNavBar></TopNavBar> : null
+              }
+              
               <NavigationContainer>
 
                   <StackNav></StackNav>
