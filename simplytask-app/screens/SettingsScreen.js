@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Switch, LayoutAnimation } from 'react-native';
 import { useContext, useState } from 'react';
 import { ThemeContext } from '../common/theme-context';
 import { SettingsContext } from '../common/settings-context';
@@ -12,6 +12,17 @@ export function SettingsScreen( { navigation }) {
     const updatedSettingsData = {...settingsData};
     const [isEnabled, setIsEnabled] = useState(settingsData.distractionFree);
     const toggleSwitch = () => setIsEnabled(!isEnabled);
+    const layoutAnimConfig = {
+      duration: 300,
+      update: {
+        type: LayoutAnimation.Types.easeInEaseOut
+      },
+      delete: {
+        duration: 200,
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+    };
 
     return (
       <View style={[styles.container, {backgroundColor:theme.background}]}>
@@ -24,7 +35,7 @@ export function SettingsScreen( { navigation }) {
             <TouchableOpacity 
               style={styles.settingButton}
               onPress={() => {
-                alert('pressed theme setting');
+                navigation.navigate('themeSelection');
               }}
             >
               <Text style={[styles.label, {color:theme.primaryText}]}>{settingsData.theme}</Text>
@@ -50,11 +61,49 @@ export function SettingsScreen( { navigation }) {
               onValueChange={() => {
                 updatedSettingsData.distractionFree = !isEnabled;
                 setSettingsData(updatedSettingsData);
+                LayoutAnimation.configureNext(layoutAnimConfig);
                 saveSettingsData(updatedSettingsData);
                 toggleSwitch();  
               }}
               value={isEnabled}
             />
+          </View>
+        </View>
+
+        {/** HELP SETTINGS */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionHeader, {color:theme.disabledText}]}>HELP</Text>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+            <Text style={[styles.label, {color:theme.primaryText}]}>How this App Works</Text>
+            <TouchableOpacity 
+              style={styles.settingButton}
+              onPress={() => {
+                navigation.navigate('howto');
+              }}
+            >
+              <Icon 
+                style={{}}
+                name="keyboard-arrow-right" 
+                size={24} 
+                color={theme.primaryText}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+            <Text style={[styles.label, {color:theme.primaryText}]}>About</Text>
+            <TouchableOpacity 
+              style={styles.settingButton}
+              onPress={() => {
+                navigation.navigate('about');
+              }}
+            >
+              <Icon 
+                style={{}}
+                name="keyboard-arrow-right" 
+                size={24} 
+                color={theme.primaryText}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 

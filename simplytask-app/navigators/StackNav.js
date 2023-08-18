@@ -4,6 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomTabs } from './BottomTabs';
 import { DetailsScreen } from '../screens/DetailsScreen';
 import { CreateNewListScreen } from '../screens/CreateNewListScreen';
+import { ThemeSelectionScreen } from '../screens/ThemeSelectionScreen';
+import { HowToScreen } from '../screens/HowToScreen';
+import { AboutScreen } from '../screens/AboutScreen';
 import { ListContext, ListDataContext } from '../common/list-context';
 import { ThemeContext } from '../common/theme-context';
 
@@ -102,6 +105,24 @@ export function StackNav() {
                     })
                 }
             
+            />
+
+            <Stack.Screen 
+                name="themeSelection"
+                component={ThemeSelectionScreen}
+                options={{headerTitle: 'Select a theme'}}
+            />
+
+            <Stack.Screen 
+                name="howto"
+                component={HowToScreen}
+                options={{headerTitle: 'How this App Works'}}
+            />
+
+            <Stack.Screen 
+                name="about"
+                component={AboutScreen}
+                options={{headerTitle: 'About SimplyTask'}}
             />
         </Stack.Navigator>   
     );

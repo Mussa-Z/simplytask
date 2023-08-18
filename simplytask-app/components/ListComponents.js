@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, LayoutAnimation } from "react-native";
 import { useContext } from "react";
 import { ListContext, ListDataContext } from "../common/list-context";
 import { ThemeContext } from "../common/theme-context";
@@ -10,8 +10,7 @@ import { SettingsContext } from "../common/settings-context";
 export function ListName(props) {
     const {currentList, setCurrentList} = useContext(ListContext);
     const updatedCurrentList = {...currentList};
-    const {theme, setTheme} = useContext(ThemeContext);
-    
+    const {theme, setTheme} = useContext(ThemeContext);   
 
     return(
         <TouchableOpacity
@@ -40,6 +39,17 @@ export function Task(props) {
     const {theme, setTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
     const updatedSettingsData = {...settingsData};
+    const layoutAnimConfig = {
+        duration: 300,
+        update: {
+          type: LayoutAnimation.Types.easeInEaseOut
+        },
+        delete: {
+          duration: 300,
+          type: LayoutAnimation.Types.easeInEaseOut,
+          property: LayoutAnimation.Properties.opacity,
+        },
+    };
 
     return(
         <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
@@ -57,6 +67,7 @@ export function Task(props) {
                         }
                     }
                     setListData(updatedListData);
+                    LayoutAnimation.configureNext(layoutAnimConfig);
                     saveListData(updatedListData);
                     setSettingsData(updatedSettingsData);
                     saveSettingsData(updatedSettingsData);

@@ -29,7 +29,7 @@ export function RewardsScreen( { navigation }) {
               height: 29,}]}>
 
             </View>
-            <Text style={{color:theme.primaryText}}>
+            <Text style={{color:theme.primaryText, paddingLeft: 5}}>
               {numOfUnlockedItems() + ' / ' + settingsData.avatars.length} 
             </Text>
           </View>

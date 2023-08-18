@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native';
+import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity, Keyboard, LayoutAnimation } from 'react-native';
 import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from '../common/theme-context';
 import { ListContext, ListDataContext } from '../common/list-context';
@@ -13,6 +13,17 @@ export function ListScreen( { route, navigation }) {
   const {currentList, setCurrentList} = useContext(ListContext);
   const [taskInputText, setTaskInputText] = useState('');
   const [expandCompleted, setExpandCompleted] = useState(false);
+  const layoutAnimConfig = {
+    duration: 300,
+    update: {
+      type: LayoutAnimation.Types.easeInEaseOut
+    },
+    delete: {
+      duration: 300,
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+};
 
   return (
     <KeyboardAvoidingView 
@@ -78,6 +89,7 @@ export function ListScreen( { route, navigation }) {
               if (listData[currentList.listIndex].completed.length > 0)
               {
                 setExpandCompleted(!expandCompleted);
+                LayoutAnimation.configureNext(layoutAnimConfig);
               }
             }}
         >
