@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export function DetailsScreen( { route, navigation }) {
 
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const taskObj = {...route.params.taskObj};
     const [taskName, setTaskName] = useState(taskObj.taskName);
     const [note, setNote] = useState(taskObj.note);

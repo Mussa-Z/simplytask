@@ -5,8 +5,8 @@ import { ListDataContext } from '../common/list-context';
 
 export function StatsScreen( { navigation }) {
 
-    const {theme, setTheme} = useContext(ThemeContext);
-    const {listData, setListData} = useContext(ListDataContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
+    const {listData, setListData, saveListData} = useContext(ListDataContext);
     const numOfTasksRef = useRef(0);
     const numofTasksCompletedRef = useRef(0);
 

@@ -7,7 +7,7 @@ import { Avatar } from '../components/RewardsComponents';
 
 export function RewardsScreen( { navigation }) {
 
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
     const numOfUnlockedItems = () => {
       let arr = settingsData.avatars.filter(function(item) {
@@ -15,7 +15,6 @@ export function RewardsScreen( { navigation }) {
       });
       return arr.length;
     } 
-
 
     return (
       <View style={[styles.container, {backgroundColor:theme.background}]}>

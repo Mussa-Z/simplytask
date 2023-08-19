@@ -1,13 +1,17 @@
 import { StyleSheet, View, Text, TouchableOpacity, Switch, LayoutAnimation } from 'react-native';
 import { useContext, useState } from 'react';
-import { ThemeContext } from '../common/theme-context';
+import { themes, ThemeContext } from '../common/theme-context';
 import { SettingsContext } from '../common/settings-context';
 import Icon from '@expo/vector-icons/MaterialIcons';
+/** imports for reset data */
+import { ListContext, ListDataContext } from '../common/list-context';
+import defaultData from '../assets/data/defaultData.json';
+import { DEFAULT_SETTINGS } from '../common/settings-data';
 
 
 export function SettingsScreen( { navigation }) {
 
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
     const updatedSettingsData = {...settingsData};
     const [isEnabled, setIsEnabled] = useState(settingsData.distractionFree);
@@ -23,6 +27,12 @@ export function SettingsScreen( { navigation }) {
         property: LayoutAnimation.Properties.opacity,
       },
     };
+
+    /** consts for reset data */
+    const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
+    const {listData, setListData, saveListData} = useContext(ListDataContext);
+
+    /** end of consts for reset data */
 
     return (
       <View style={[styles.container, {backgroundColor:theme.background}]}>
@@ -107,6 +117,27 @@ export function SettingsScreen( { navigation }) {
           </View>
         </View>
 
+        {/** DEBUG RESET DATA */}
+        <TouchableOpacity 
+          style={[styles.resetButton]}
+          onPress={() => {
+
+            setTheme(themes.dark);
+            saveTheme(themes.dark);
+
+            setCurrentList(defaultData.data.selectedList);
+            saveCurrentList(defaultData.data.selectedList);
+
+            setListData(defaultData.data.lists);
+            saveListData(defaultData.data.lists);
+
+            setSettingsData(DEFAULT_SETTINGS);
+            saveSettingsData(DEFAULT_SETTINGS);
+          }}
+        >
+          <Text style={[styles.resetText, {color:theme.secondaryText}]}>reset app data</Text>
+        </TouchableOpacity>
+
       </View>
     );
 }
@@ -140,5 +171,16 @@ const styles = StyleSheet.create({
     settingButton: {
       flexDirection: 'row',
       alignItems: 'center'
-    }
+    },
+    resetButton: {
+      width: '100%',
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1,
+      marginTop: 40
+    },
+    resetText: {
+      padding: 10
+    },
 });

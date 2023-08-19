@@ -28,7 +28,7 @@ export function TextButton(props){
 /** TOP NAV BAR */
 export function TopNavBar() {
 
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
 
     return (
@@ -46,9 +46,7 @@ export function TopNavBar() {
                     <Text style={[styles.karmaCounterText, {color:theme.buttonNeutralText}]}>{settingsData.karma}</Text>
                 </View>
             </View>
-
-            
-      </View>
+        </View>
     );
 }
 

@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export function BottomTabs() {
 
-  const {theme, setTheme} = useContext(ThemeContext);
+  const {theme, setTheme, saveTheme} = useContext(ThemeContext);
   const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
 
   return(
@@ -45,7 +45,7 @@ export function BottomTabs() {
             );
           }}}  
       />
-      
+
       {settingsData.distractionFree == false ?
         <Tab.Screen 
           name="Rewards" 

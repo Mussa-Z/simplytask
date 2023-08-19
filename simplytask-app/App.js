@@ -15,26 +15,33 @@ import { DEFAULT_SETTINGS } from './common/settings-data';
 
 export default function App() {
 
-  const [theme, setTheme] = useState(themes.dark);
-  const selectedTheme = useMemo(
-    () => ({theme, setTheme}),
-    [theme]
-  );
+  const saveTheme = useCallback((themeObj) => {
+    console.log("I just received a request to save theme. Request Acknowledged.")
+  }, []);
 
-  const [currentList, setCurrentList] = useState(defaultData.data.selectedList);
-  const currentListName = useMemo(
-    () => ({currentList, setCurrentList}),
-    [currentList]
-  );
+  const saveCurrentList = useCallback((listObj) => {
+    console.log("I just received a request to save current list. Request Acknowledged.")
+  }, []);
 
   const saveListData = useCallback((listDataArray) => {
-    console.log("I just received a request to save data. Request Acknowledged.")
+    console.log("I just received a request to save list data. Request Acknowledged.")
   }, []);
 
   const saveSettingsData = useCallback((settingsDataObj) => {
     console.log("I just received a request to save settings data. Request Acknowledged.")
   }, []);
   
+  const [theme, setTheme] = useState(themes.dark);
+  const selectedTheme = useMemo(
+    () => ({theme, setTheme, saveTheme}),
+    [theme]
+  );
+
+  const [currentList, setCurrentList] = useState(defaultData.data.selectedList);
+  const currentListName = useMemo(
+    () => ({currentList, setCurrentList, saveCurrentList}),
+    [currentList]
+  );
 
   // const startingData = ['Groceries List', 'Party List', 'Assignment To Dos', 'Moving Checklist', 'Additional Test', 'Birthday Party Checklist'];
   // const [listData, setListData] = useState(startingData);

@@ -5,7 +5,7 @@ import { ThemeContext } from '../common/theme-context';
 export function CreateNewListScreen( { route, navigation }) {
 
     const textInputRef = useRef();
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
 
     const focusOnInput = e => {
         textInputRef.current.focus();

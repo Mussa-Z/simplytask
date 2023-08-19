@@ -15,7 +15,7 @@ export function ListsDrawer({route, navigation}) {
     // const additionalParams = {listNames: [...listsData], currentList: currentList, updateCurrentListCallback: updateCurrentListCallback}
     const {theme, setTheme} = useContext(ThemeContext);
     // const {listData, setListData} = useContext(ListDataContext);
-    const {currentList, setCurrentList} = useContext(ListContext);
+    const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
 
     return (
       <Drawer.Navigator
@@ -30,7 +30,7 @@ export function ListsDrawer({route, navigation}) {
           initialParams={{listID: currentList.listID, listName: currentList.listName}}
           options={
             ({ route, navigation }) => ({ 
-              headerTitle: route.params.listName,
+              headerTitle: currentList.listName,
               headerTitleContainerStyle: {width: '70%'},
               headerTitleAlign: 'left',
               // headerTintColor: theme.primaryText,

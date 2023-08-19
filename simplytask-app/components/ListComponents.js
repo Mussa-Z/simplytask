@@ -1,16 +1,17 @@
 import { StyleSheet, TouchableOpacity, View, Text, LayoutAnimation } from "react-native";
 import { useContext } from "react";
 import { ListContext, ListDataContext } from "../common/list-context";
-import { ThemeContext } from "../common/theme-context";
+import { ThemeContext, themes } from "../common/theme-context";
 import { SettingsContext } from "../common/settings-context";
+import Icon from '@expo/vector-icons/Feather';
 
 
 
 /** LIST NAME COMPONENT */
 export function ListName(props) {
-    const {currentList, setCurrentList} = useContext(ListContext);
+    const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
     const updatedCurrentList = {...currentList};
-    const {theme, setTheme} = useContext(ThemeContext);   
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);   
 
     return(
         <TouchableOpacity
@@ -21,6 +22,7 @@ export function ListName(props) {
                 updatedCurrentList.listIndex = props.listIndex;
                 console.log(updatedCurrentList);
                 setCurrentList(updatedCurrentList);
+                saveCurrentList(updatedCurrentList);
                 props.navigation.navigate('List', {listID: props.id, listName: props.name});
             }}
         >
@@ -35,8 +37,8 @@ export function ListName(props) {
 export function Task(props) {
     const {listData, setListData, saveListData} = useContext(ListDataContext);
     const updatedListData = [...listData];
-    const {currentList, setCurrentList} = useContext(ListContext);
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
     const updatedSettingsData = {...settingsData};
     const layoutAnimConfig = {
@@ -87,7 +89,7 @@ export function Task(props) {
 
 /** COMPLETED TASK COMPONENT */
 export function CompletedTask(props) {
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     return(
         <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
             <View style={styles.taskCircleTouch}>
@@ -97,6 +99,54 @@ export function CompletedTask(props) {
                 <Text numberOfLines={1} style={[styles.completedTaskText, {color: theme.disabledText, }]}>{props.taskName}</Text>
             </View>
         </View>
+    );
+}
+
+/** THEME SELECT ROW COMPONENT */
+export function ThemeSelection(props) {
+
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
+    const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
+    const isSelected = () => {
+        return settingsData.theme == props.themeName;
+    }; 
+
+    return(
+        <TouchableOpacity 
+            style={[styles.cell, isSelected() ? {backgroundColor: theme.drawerBackground} : {backgroundColor: theme.cardBackground}]}
+            onPress={() => {
+                if (isSelected() == false){
+                    const updatedSettingsData = {...settingsData};
+                    let selectedThemeObj = {...theme};
+
+                    updatedSettingsData.theme = props.themeName;
+                    setSettingsData(updatedSettingsData);
+                    saveSettingsData(updatedSettingsData);
+
+                    if(props.themeName == 'White') {
+                        selectedThemeObj = themes.white;
+                    } else if(props.themeName == 'Light') {
+                        selectedThemeObj = themes.light;
+                    } else if(props.themeName == 'Dark') {
+                        selectedThemeObj = themes.dark;
+                    } else { selectedThemeObj = themes.black;}
+
+                    setTheme(selectedThemeObj);
+                    saveTheme(selectedThemeObj);
+
+                }
+            }}
+        >
+            <Text style={[styles.label, {color:theme.primaryText}]}>{props.themeName}</Text>
+            {isSelected() ? 
+                <Icon 
+                    style={{}}
+                    name="check" 
+                    size={24} 
+                    color={theme.primaryText}
+                /> : null
+            }
+        </TouchableOpacity>
     );
 }
 
@@ -153,5 +203,20 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         // textDecorationLine: 'line-through', 
         // textDecorationStyle: 'solid'
-    }
+    },
+    cell: {
+      flexDirection: 'row',
+      width: '92%',
+      height: 50,
+      marginTop: 10,
+      marginLeft: '4%',
+      marginRight: '4%',
+      borderRadius: 10,
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    label: {
+      fontSize: 16,
+    },
 });

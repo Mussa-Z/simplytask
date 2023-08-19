@@ -7,10 +7,10 @@ import moment from 'moment';
 
 export function ListScreen( { route, navigation }) {
 
-  const {theme, setTheme} = useContext(ThemeContext);
+  const {theme, setTheme, saveTheme} = useContext(ThemeContext);
   const {listData, setListData, saveListData} = useContext(ListDataContext);
   const updatedListData = [...listData];
-  const {currentList, setCurrentList} = useContext(ListContext);
+  const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
   const [taskInputText, setTaskInputText] = useState('');
   const [expandCompleted, setExpandCompleted] = useState(false);
   const layoutAnimConfig = {

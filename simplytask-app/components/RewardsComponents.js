@@ -7,7 +7,7 @@ import Icon from '@expo/vector-icons/Feather';
 /** AVATAR COMPONENT */
 export function Avatar(props) {
 
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     const {settingsData, setSettingsData, saveSettingsData} = useContext(SettingsContext);
     const updatedSettingsData = {...settingsData};
 
@@ -33,7 +33,11 @@ export function Avatar(props) {
                     <TouchableOpacity
                         style={[styles.unlockButton, {width: props.size, height: props.size, borderRadius: props.size / 2}]}
                         onPress={() => {
-                            alert('pressed unlock avatar');
+                            if (settingsData.karma >= props.cost){
+                                updatedSettingsData.karma -= props.cost;
+                                updatedSettingsData.avatars[props.index].status = "unlocked";
+                                setSettingsData(updatedSettingsData);
+                            }
                         }}
                     >
                         <Icon 
@@ -54,7 +58,6 @@ export function Avatar(props) {
             : null}   
 
         </View>
-
 
     );
 }

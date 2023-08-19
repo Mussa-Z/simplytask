@@ -54,9 +54,10 @@ export const DEFAULT_SETTINGS = {
                 {id: "ava_52", name: "wolf", uri: require('../assets/images/avatars/52.png'), status: "locked", cost: 10, index: 51},
                 {id: "ava_53", name: "racoon", uri: require('../assets/images/avatars/53.png'), status: "locked", cost: 20, index: 52},
                 {id: "ava_54", name: "goat", uri: require('../assets/images/avatars/54.png'), status: "locked", cost: 10, index: 53}                                    
-        ],
-        chosenAvatar: {id: "ava_01", name: "bird-1", uri: require('../assets/images/avatars/01.png'), status: "unlocked", cost: 0, index: 0},
-        karma: 1,
-        theme: "Dark",
-        distractionFree: false
+    ],
+    chosenAvatar: {id: "ava_01", name: "bird-1", uri: require('../assets/images/avatars/01.png'), status: "unlocked", cost: 0, index: 0},
+    karma: 1,
+    themeOptions: ["White", "Light", "Dark", "Black"],
+    theme: "Dark",
+    distractionFree: false
 }

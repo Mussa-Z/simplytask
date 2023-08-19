@@ -14,11 +14,11 @@ const Stack = createNativeStackNavigator();
 
 export function StackNav() {
 
-    const {currentList, setCurrentList} = useContext(ListContext);
+    const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
     const {listData, setListData, saveListData} = useContext(ListDataContext);
     const updatedListData = [...listData];
     const updatedCurrentList = {...currentList}
-    const {theme, setTheme} = useContext(ThemeContext);
+    const {theme, setTheme, saveTheme} = useContext(ThemeContext);
 
     return(
         <Stack.Navigator
@@ -53,6 +53,7 @@ export function StackNav() {
                                             }
                                         }
                                         setListData(updatedListData);
+                                        saveListData(updatedListData);
                                         // navigation.navigate('List', {listID: currentList.listID, listName: currentList.listName});
                                         Keyboard.dismiss();
                                         navigation.setParams({
@@ -94,8 +95,9 @@ export function StackNav() {
                                         console.log(updatedListData);
                                         console.log(updatedCurrentList);
                                         setListData(updatedListData);
-                                        setCurrentList(updatedCurrentList);
                                         saveListData(updatedListData);
+                                        setCurrentList(updatedCurrentList);
+                                        saveCurrentList(updatedCurrentList);    
                                         navigation.navigate('List', {listID: newListID, listName: newListName});
                                     }
 
@@ -124,6 +126,7 @@ export function StackNav() {
                 component={AboutScreen}
                 options={{headerTitle: 'About SimplyTask'}}
             />
+
         </Stack.Navigator>   
     );
 }
