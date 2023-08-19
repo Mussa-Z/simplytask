@@ -62,6 +62,21 @@ export function Avatar(props) {
     );
 }
 
+/** PROGRESS BAR COMPONENT */
+export function ProgressBar(props){
+    return(
+        <View style={[styles.progressBarContainer, 
+                    {width: props.width, height: props.height, backgroundColor: props.bgColor}]}>
+        
+            <View style={[styles.rewardsProgressBar, 
+                        {backgroundColor: props.fgColor, 
+                        width: props.progress * props.width, 
+                        height: props.height,}]}>
+            </View>
+        </View>
+    );
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -95,6 +110,12 @@ const styles = StyleSheet.create({
         height: 14,
         borderRadius: 7,
         marginRight: 5        
+    },
+    progressBarContainer: {
+        justifyContent: 'center',
+      },
+    progressBar: {
+        position: 'absolute',
     },
 
 });

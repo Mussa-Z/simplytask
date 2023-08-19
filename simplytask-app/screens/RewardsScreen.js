@@ -20,7 +20,7 @@ export function RewardsScreen( { navigation }) {
       <View style={[styles.container, {backgroundColor:theme.background}]}>
         <View style={styles.rewardsProgress}>
           <Text style={{color:theme.secondaryText}}>Rewards unlocked:</Text>
-          <View style={styles.rewardsProgressBarContainer}>
+          <View style={[styles.rewardsProgressBarContainer, {borderColor:theme.borderColour}]}>
             
             <View style={[styles.rewardsProgressBar, 
               {backgroundColor: theme.buttonColorful, 

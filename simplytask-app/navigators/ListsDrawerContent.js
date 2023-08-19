@@ -80,7 +80,7 @@ export function ListsDrawerContent(props) {
           removeList(currentList);
         }}
       >
-        <Text style={[styles.delText, {color:theme.secondaryText}]}>delete selected list</Text>
+        <Text style={[styles.delText, {color:theme.buttonColorful}]}>delete selected list</Text>
       </TouchableOpacity>
     </View>
 

@@ -39,8 +39,8 @@ export function SettingsScreen( { navigation }) {
 
         {/** DISPLAY SETTINGS */}
         <View style={styles.section}>
-          <Text style={[styles.sectionHeader, {color:theme.disabledText}]}>DISPLAY SETTINGS</Text>
-          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+          <Text style={[styles.sectionHeader, {color:theme.secondaryText}]}>DISPLAY SETTINGS</Text>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <Text style={[styles.label, {color:theme.primaryText}]}>Theme</Text>
             <TouchableOpacity 
               style={styles.settingButton}
@@ -61,13 +61,13 @@ export function SettingsScreen( { navigation }) {
 
         {/** APP SETTINGS */}
         <View style={styles.section}>
-          <Text style={[styles.sectionHeader, {color:theme.disabledText}]}>APP SETTINGS</Text>
-          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+          <Text style={[styles.sectionHeader, {color:theme.secondaryText}]}>APP SETTINGS</Text>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <Text style={[styles.label, {color:theme.primaryText}]}>Distraction-free Experience</Text>
             <Switch 
-              trackColor={{false: '#767577', true: theme.buttonColorful}}
+              trackColor={{false: theme.background, true: theme.buttonColorful}} //'#767577'
               thumbColor={isEnabled ? theme.primaryText : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
+              ios_backgroundColor={theme.background}  //"#3e3e3e"
               onValueChange={() => {
                 updatedSettingsData.distractionFree = !isEnabled;
                 setSettingsData(updatedSettingsData);
@@ -82,8 +82,8 @@ export function SettingsScreen( { navigation }) {
 
         {/** HELP SETTINGS */}
         <View style={styles.section}>
-          <Text style={[styles.sectionHeader, {color:theme.disabledText}]}>HELP</Text>
-          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+          <Text style={[styles.sectionHeader, {color:theme.secondaryText}]}>HELP</Text>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <Text style={[styles.label, {color:theme.primaryText}]}>How this App Works</Text>
             <TouchableOpacity 
               style={styles.settingButton}
@@ -99,7 +99,7 @@ export function SettingsScreen( { navigation }) {
               />
             </TouchableOpacity>
           </View>
-          <View style={[styles.cell, {backgroundColor: theme.cardBackground}]}>
+          <View style={[styles.cell, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <Text style={[styles.label, {color:theme.primaryText}]}>About</Text>
             <TouchableOpacity 
               style={styles.settingButton}
@@ -135,7 +135,7 @@ export function SettingsScreen( { navigation }) {
             saveSettingsData(DEFAULT_SETTINGS);
           }}
         >
-          <Text style={[styles.resetText, {color:theme.secondaryText}]}>reset app data</Text>
+          <Text style={[styles.resetText, {color:theme.buttonColorful}]}>reset app data</Text>
         </TouchableOpacity>
 
       </View>
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       padding: 10,
       alignItems: 'center',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      borderWidth: 1
     },
     label: {
       fontSize: 16,

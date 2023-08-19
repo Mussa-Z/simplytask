@@ -20,9 +20,9 @@ export function DetailsScreen( { route, navigation }) {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={[styles.container, {backgroundColor: theme.background}]}>
                     <View style={styles.taskNameSection}>
-                        <Text style={[styles.label, {color:theme.disabledText}]}>Task Name </Text>
+                        <Text style={[styles.label, {color:theme.secondaryText}]}>Task Name </Text>
                         <TextInput
-                            style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText}]}
+                            style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText, borderColor: theme.borderColour}]}
                             multiline={true}
                             numberOfLines={3}
                             onChangeText={(text) => {
@@ -42,11 +42,11 @@ export function DetailsScreen( { route, navigation }) {
                     </View>
 
                     <View style={styles.noteSection}>
-                        <Text style={[styles.label, {color:theme.disabledText}]}>Note </Text>
+                        <Text style={[styles.label, {color:theme.secondaryText}]}>Note </Text>
                         <TextInput
                             placeholder='add a note'
                             placeholderTextColor={theme.disabledText}
-                            style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText}]}
+                            style={[styles.inputText, {backgroundColor: theme.cardBackground, color:theme.primaryText, borderColor: theme.borderColour}]}
                             multiline={true}
                             numberOfLines={5}
                             onChangeText={(text) => {
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         textAlignVertical: 'top',
         paddingLeft: 10,
+        borderWidth: 1
     },
     dateAddedSection: {
         width: '100%',

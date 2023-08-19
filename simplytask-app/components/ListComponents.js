@@ -4,6 +4,7 @@ import { ListContext, ListDataContext } from "../common/list-context";
 import { ThemeContext, themes } from "../common/theme-context";
 import { SettingsContext } from "../common/settings-context";
 import Icon from '@expo/vector-icons/Feather';
+import moment from 'moment';
 
 
 
@@ -54,17 +55,29 @@ export function Task(props) {
     };
 
     return(
-        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
+        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <TouchableOpacity 
                 style={styles.taskCircleTouch}
                 onPress={() => {                                        
                     for (var i = updatedListData[currentList.listIndex].tasks.length - 1; i >= 0; i--) {
                         if (updatedListData[currentList.listIndex].tasks[i].taskID == props.id) {
+
                             const completedTaskObj = updatedListData[currentList.listIndex].tasks[i];
+                            completedTaskObj['dateCompleted'] = moment().format('YYYY-MM-DDTHH:mm:ss');
+
                             updatedListData[currentList.listIndex].tasks.splice(i, 1);
                             updatedListData[currentList.listIndex].completed.push(completedTaskObj);
                             updatedSettingsData.karma += 1;
-
+                            updatedSettingsData.exp += 25;
+                            
+                            if (updatedSettingsData.exp >= settingsData.currentLevel.exp_required){
+                                if (updatedSettingsData.currentLevel.index < updatedSettingsData.levels.length - 1){
+                                    updatedSettingsData.currentLevel = updatedSettingsData.levels[updatedSettingsData.currentLevel.index + 1];
+                                    updatedSettingsData.exp = 0;
+                                } else {
+                                    updatedSettingsData.exp = settingsData.currentLevel.exp_required;
+                                }
+                            }
                             break;
                         }
                     }
@@ -91,7 +104,7 @@ export function Task(props) {
 export function CompletedTask(props) {
     const {theme, setTheme, saveTheme} = useContext(ThemeContext);
     return(
-        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground}]}>
+        <View style={[styles.taskCard, {backgroundColor: theme.cardBackground, borderColor: theme.borderColour}]}>
             <View style={styles.taskCircleTouch}>
                 <View style={[styles.taskCircle, {backgroundColor: theme.background, borderColor: theme.borderColour}]}></View>
             </View>
@@ -113,7 +126,8 @@ export function ThemeSelection(props) {
 
     return(
         <TouchableOpacity 
-            style={[styles.cell, isSelected() ? {backgroundColor: theme.drawerBackground} : {backgroundColor: theme.cardBackground}]}
+            style={[styles.cell, {borderColor: theme.borderColour}, isSelected() ? {backgroundColor: theme.drawerBackground} : 
+                    {backgroundColor: theme.buttonNeutral}]}
             onPress={() => {
                 if (isSelected() == false){
                     const updatedSettingsData = {...settingsData};
@@ -167,7 +181,8 @@ const styles = StyleSheet.create({
         marginTop: '4%',
         marginLeft: '4%',
         marginRight: '4%',
-        borderRadius: 10
+        borderRadius: 10,
+        borderWidth: 1
     },
     taskCircleTouch: {
         // backgroundColor:'red', 
@@ -214,7 +229,8 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       padding: 10,
       alignItems: 'center',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      borderWidth: 1
     },
     label: {
       fontSize: 16,

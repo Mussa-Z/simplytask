@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useContext } from "react";
 import { ThemeContext } from "../common/theme-context";
 import { SettingsContext } from "../common/settings-context";
+import { ProgressBar } from "./RewardsComponents";
 
 /** ICON BUTTON COMPONENT */
 export function IconButton(props) {
@@ -37,13 +38,24 @@ export function TopNavBar() {
                 source={settingsData.chosenAvatar.uri}
                 style={styles.avatarImage}
             />
+            <View style={styles.levelContainer}>
+                <Text style={{color: theme.disabledText, fontSize: 10}}>{settingsData.currentLevel.title}</Text>
+                <Text style={{color: theme.secondaryText, fontSize: 14}}>{settingsData.currentLevel.subTitle}</Text>
+                <ProgressBar 
+                    width={100}
+                    height={5}
+                    bgColor='#c5ead5'
+                    fgColor='#81b89a'
+                    progress={settingsData.exp / settingsData.currentLevel.exp_required}
+                />
+            </View>
             <View style={styles.coinsContainer}>
                 <Image
                     source={require('../assets/images/triskelion.png')}
                     style={styles.coinImage}
                 />
-                <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral}]}>
-                    <Text style={[styles.karmaCounterText, {color:theme.buttonNeutralText}]}>{settingsData.karma}</Text>
+                <View style={[styles.karmaCounterBg, {backgroundColor: theme.buttonNeutral, borderColor: theme.borderColour}]}>
+                    <Text style={[styles.karmaCounterText, {color:theme.primaryText}]}>{settingsData.karma}</Text>
                 </View>
             </View>
         </View>
@@ -77,8 +89,13 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         marginLeft: '4%'
     },
+    levelContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     coinsContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -98,6 +115,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         justifyContent: 'center',
         marginRight: '4%',
+        borderWidth: 1
     },
     karmaCounterText : {
         paddingRight: 10,

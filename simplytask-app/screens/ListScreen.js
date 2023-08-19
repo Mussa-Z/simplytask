@@ -82,7 +82,7 @@ export function ListScreen( { route, navigation }) {
           </TouchableOpacity>
       </View>
 
-      <View style={styles.completedSection}>
+      <View style={[styles.completedSection]}>
         <TouchableOpacity 
             style={[styles.completedHeader, {backgroundColor: theme.cardBackground}]}
             onPress={() => {
