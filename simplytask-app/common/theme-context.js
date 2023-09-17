@@ -1,3 +1,6 @@
+// global context for theme so that all components can access
+// predefined themes are in themes
+
 import { createContext } from "react";
 
 export const themes = {

@@ -26,11 +26,11 @@ export function CreateNewListScreen( { route, navigation }) {
                 });
             }}
         />
-        {/* <View style={styles.deadZone}></View> */}
       </View>
     );
 }
 
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -38,8 +38,6 @@ const styles = StyleSheet.create({
     },
     inputText: {
         width: '100%',
-        // borderBottomWidth: 1,
-        // borderColor: "#3fa3bd",
         height: 45,
         fontSize: 16,
         textAlign: 'left',

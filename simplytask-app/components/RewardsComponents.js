@@ -77,6 +77,7 @@ export function ProgressBar(props){
     );
 }
 
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,

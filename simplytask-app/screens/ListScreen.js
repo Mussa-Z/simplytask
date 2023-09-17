@@ -1,5 +1,5 @@
 import { StyleSheet, View, ScrollView, TextInput, Text, KeyboardAvoidingView, TouchableOpacity, Keyboard, LayoutAnimation } from 'react-native';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from '../common/theme-context';
 import { ListContext, ListDataContext } from '../common/list-context';
 import { Task, CompletedTask } from '../components/ListComponents';
@@ -27,7 +27,8 @@ export function ListScreen( { route, navigation }) {
 
   return (
     <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior='padding'
       keyboardVerticalOffset={155} //update this to a dynamically calculated value based on screen dimension
       style={[styles.container, { backgroundColor: theme.background}]}
     >
@@ -114,6 +115,7 @@ export function ListScreen( { route, navigation }) {
   );
 }
 
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,

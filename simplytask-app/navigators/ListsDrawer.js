@@ -2,10 +2,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useContext } from 'react';
 import { ListScreen } from '../screens/ListScreen';
 import { ListsDrawerContent } from './ListsDrawerContent';
-import { IconButton } from '../components/Navigation';
-import { TextButton } from '../components/Navigation';
 import { ThemeContext } from '../common/theme-context';
-import { ListContext, ListDataContext } from '../common/list-context';
+import { ListContext } from '../common/list-context';
 import Icon from '@expo/vector-icons/Entypo';
 
 const Drawer = createDrawerNavigator();
@@ -33,23 +31,9 @@ export function ListsDrawer({route, navigation}) {
               headerTitle: currentList.listName,
               headerTitleContainerStyle: {width: '70%'},
               headerTitleAlign: 'left',
-              // headerTintColor: theme.primaryText,
               headerShadowVisible: true,
               headerRightContainerStyle: {width: '15%'},
               headerRight: (props) => (
-                // <IconButton
-                //   title="plus"
-                //   image={require('../assets/images/plus.png')}
-                //   onPress={() => {
-                //     navigation.navigate('CreateNewList');
-                //   }}
-                // ></IconButton>
-                // <TextButton
-                //   text="+"
-                //   onPress={() => {
-                //     navigation.navigate('CreateNewList', {taskName: ''});
-                //   }}
-                // ></TextButton>
                 <Icon
                   style={{paddingRight: 14}}
                   name="plus" 

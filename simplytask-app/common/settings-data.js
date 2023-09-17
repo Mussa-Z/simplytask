@@ -1,3 +1,5 @@
+// default settings for the app
+
 export const DEFAULT_SETTINGS = {
     avatars: [
                 {id: "ava_01", name: "bird-1", uri: require('../assets/images/avatars/01.png'), status: "unlocked", cost: 0, index: 0},

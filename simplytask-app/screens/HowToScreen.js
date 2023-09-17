@@ -92,7 +92,8 @@ export function HowToScreen( { navigation }) {
     );
 
 }
-  
+
+/** STYLES */
 const styles = StyleSheet.create({
     section: {
         flexDirection: 'column',

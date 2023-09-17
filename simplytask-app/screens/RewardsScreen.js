@@ -4,7 +4,6 @@ import { ThemeContext } from '../common/theme-context';
 import { SettingsContext } from "../common/settings-context";
 import { Avatar } from '../components/RewardsComponents';
 
-
 export function RewardsScreen( { navigation }) {
 
     const {theme, setTheme, saveTheme} = useContext(ThemeContext);
@@ -52,7 +51,8 @@ export function RewardsScreen( { navigation }) {
       </View>
     );
 } 
-  
+
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,

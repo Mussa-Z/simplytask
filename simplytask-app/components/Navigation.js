@@ -62,6 +62,7 @@ export function TopNavBar() {
     );
 }
 
+/** STYLES */
 const styles = StyleSheet.create({
     iconButton: {
         flex: 1,

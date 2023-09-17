@@ -31,7 +31,6 @@ export function SettingsScreen( { navigation }) {
     /** consts for reset data */
     const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
     const {listData, setListData, saveListData} = useContext(ListDataContext);
-
     /** end of consts for reset data */
 
     return (
@@ -142,6 +141,7 @@ export function SettingsScreen( { navigation }) {
     );
 }
 
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,

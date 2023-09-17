@@ -6,8 +6,6 @@ import { SettingsContext } from "../common/settings-context";
 import Icon from '@expo/vector-icons/Feather';
 import moment from 'moment';
 
-
-
 /** LIST NAME COMPONENT */
 export function ListName(props) {
     const {currentList, setCurrentList, saveCurrentList} = useContext(ListContext);
@@ -164,7 +162,7 @@ export function ThemeSelection(props) {
     );
 }
 
-
+/** STYLES */
 const styles = StyleSheet.create({
     item: {
         padding: 16,

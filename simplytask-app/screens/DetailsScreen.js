@@ -11,7 +11,6 @@ export function DetailsScreen( { route, navigation }) {
     const [note, setNote] = useState(taskObj.note);
 
     return(
-        // <View style={[styles.container, {backgroundColor: theme.background}]}>
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={155} //update this to a dynamically calculated value based on screen dimension
@@ -64,10 +63,10 @@ export function DetailsScreen( { route, navigation }) {
                 </View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-        // </View>
     );
 }
-  
+
+/** STYLES */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
